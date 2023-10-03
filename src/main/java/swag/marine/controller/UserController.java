@@ -15,18 +15,18 @@ public class UserController {
     @PostMapping("")
     public ResponseEntity<?> addUser(User user){
         Integer result = userService.addUser(user);
-        if(result > 0) return ResponseEntity.status(HttpStatus.OK).body("정상 처리");
+        if(result > 0) return ResponseEntity.status(HttpStatus.OK).body("success!");
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("실패");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
     }
 
     @GetMapping("/duplicate/{userId}")
     public ResponseEntity<?> idDuplicateCheck(@PathVariable String userId){
         boolean flag = userService.idDuplicateCheck(userId);
 
-        if(flag) return ResponseEntity.status(HttpStatus.OK).body("사용불가");
+        if(flag) return ResponseEntity.status(HttpStatus.OK).body("duplicate!");
 
-        return ResponseEntity.status(HttpStatus.OK).body("사용가능");
+        return ResponseEntity.status(HttpStatus.OK).body("no duplicate!");
     }
 
 }

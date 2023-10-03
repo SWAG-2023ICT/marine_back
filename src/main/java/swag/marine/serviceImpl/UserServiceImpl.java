@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer addUser(User user) {
         Integer result = 0;
-        if(idDuplicateCheck(user.getUserId())){
+        if(!idDuplicateCheck(user.getUserId())){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             result = userMapper.addUser(user);
         }
