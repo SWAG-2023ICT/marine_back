@@ -1,0 +1,17 @@
+package swag.marine.model;
+
+import lombok.Data;
+
+import javax.validation.constraints.Pattern;
+
+@Data
+public class User {
+    private String userId;
+
+    private String password;
+
+    private String name;
+
+    @Pattern(regexp = "^\\d{3}-\\d{3,4}-\\d{4}$",message = "전화번호 형식이 맞지않습니다.")
+    private String phoneNumber;
+}
