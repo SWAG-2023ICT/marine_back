@@ -13,7 +13,7 @@ import swag.marine.serviceImpl.UserServiceImpl;
 public class UserController {
     private final UserServiceImpl userService;
     @PostMapping("")
-    public ResponseEntity<?> addUser(User user){
+    public ResponseEntity<?> addUser(@RequestBody User user){
         Integer result = userService.addUser(user);
         if(result > 0) return ResponseEntity.status(HttpStatus.OK).body("success!");
 
