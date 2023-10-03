@@ -6,5 +6,5 @@ import swag.marine.model.User;
 @Mapper
 public interface UserMapper {
     Integer addUser(User user);
-    boolean idDuplicateCheck(String userId);
+    Integer idDuplicateCheck(String userId);
 }

@@ -26,6 +26,6 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public boolean idDuplicateCheck(String userId) {
-        return userMapper.idDuplicateCheck(userId);
+        return userMapper.idDuplicateCheck(userId) > 0;
     }
 }

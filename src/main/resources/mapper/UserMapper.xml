@@ -9,7 +9,7 @@
     </insert>
 
     <select id="idDuplicateCheck" parameterType="string">
-        SELECT user_id
+        SELECT count(user_id)
         FROM user
         WHERE user_id = #{userID}
     </select>
