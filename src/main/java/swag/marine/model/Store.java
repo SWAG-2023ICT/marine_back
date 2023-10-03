@@ -2,7 +2,6 @@ package swag.marine.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.core.annotation.Order;
 
 import javax.validation.constraints.Pattern;
 
@@ -15,4 +14,5 @@ public class Store extends User{
     private String storePhoneNumber;
     private String storeAddress;
     private byte[] storeImage;
+    private String sellerId;
 }

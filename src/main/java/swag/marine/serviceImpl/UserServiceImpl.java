@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import swag.marine.mapper.UserMapper;
+import swag.marine.model.Store;
 import swag.marine.model.User;
 import swag.marine.service.UserService;
 
@@ -21,6 +22,16 @@ public class UserServiceImpl implements UserService {
         if(!idDuplicateCheck(user.getUserId())){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             result = userMapper.addUser(user);
+        }
+        return result;
+    }
+    @Transactional
+    @Override
+    public Integer addStore(Store store) {
+        Integer result = 0;
+        if(addUser(store) > 0){
+            store.setStoreId(store.getUserId());
+            result = userMapper.addStore(store);
         }
         return result;
     }

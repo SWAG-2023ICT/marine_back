@@ -8,6 +8,11 @@
         VALUES ( #{userId},#{password},#{name},#{phoneNumber} )
     </insert>
 
+    <insert id="addStore" parameterType="Store">
+        INSERT INTO store
+        VALUES ( #{storeId}, #{storeName},#{storePhoneNumber},#{storeAddress},#{storeImage},#{sellerId})
+    </insert>
+
     <select id="idDuplicateCheck" parameterType="string"  resultType="int">
         SELECT count(user_id)
         FROM user

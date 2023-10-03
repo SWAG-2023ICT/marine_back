@@ -1,20 +1,29 @@
-package swag.marine.controller;
+package swag.marine.common.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import swag.marine.model.Store;
 import swag.marine.model.User;
 import swag.marine.serviceImpl.UserServiceImpl;
 
-@RequestMapping("/marine/users")
+@RequestMapping("/marine/auth")
 @RestController
 @RequiredArgsConstructor
-public class UserController {
+public class AuthorizationController {
     private final UserServiceImpl userService;
-    @PostMapping("")
+    @PostMapping("/users")
     public ResponseEntity<?> addUser(@RequestBody User user){
         Integer result = userService.addUser(user);
+        if(result > 0) return ResponseEntity.status(HttpStatus.OK).body("success!");
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
+    }
+
+    @PostMapping("/stores")
+    public ResponseEntity<?> addStore(@RequestBody Store store){
+        Integer result = userService.addStore(store);
         if(result > 0) return ResponseEntity.status(HttpStatus.OK).body("success!");
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
@@ -28,5 +37,4 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body("no duplicate!");
     }
-
 }
