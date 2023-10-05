@@ -6,13 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import swag.marine.model.Store;
 import swag.marine.model.User;
-import swag.marine.serviceImpl.UserServiceImpl;
+import swag.marine.serviceImpl.AuthorizationServiceImpl;
 
 @RequestMapping("/marine/auth")
 @RestController
 @RequiredArgsConstructor
 public class AuthorizationController {
-    private final UserServiceImpl userService;
+    private final AuthorizationServiceImpl userService;
     @PostMapping("/users")
     public ResponseEntity<?> addUser(@RequestBody User user){
         Integer result = userService.addUser(user);
