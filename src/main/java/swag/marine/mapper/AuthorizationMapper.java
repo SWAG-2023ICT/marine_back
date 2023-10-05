@@ -9,4 +9,5 @@ public interface AuthorizationMapper {
     Integer addUser(User user);
     Integer addStore(Store store);
     Integer idDuplicateCheck(String userId);
+    User getUser(User user);
 }

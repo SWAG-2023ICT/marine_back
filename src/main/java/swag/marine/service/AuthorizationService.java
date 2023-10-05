@@ -4,7 +4,8 @@ import swag.marine.model.Store;
 import swag.marine.model.User;
 
 public interface AuthorizationService {
-    Integer addUser(User user);
-    Integer addStore(Store store);
+    boolean addUser(User user);
+    boolean addStore(Store store);
     boolean idDuplicateCheck(String userId);
+    boolean login(User user);
 }

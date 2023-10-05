@@ -13,18 +13,27 @@ import swag.marine.serviceImpl.AuthorizationServiceImpl;
 @RequiredArgsConstructor
 public class AuthorizationController {
     private final AuthorizationServiceImpl userService;
+
+    @PostMapping("")
+    public ResponseEntity<?> login(@RequestBody User user){
+        boolean flag = userService.login(user);
+        if(flag) return ResponseEntity.status(HttpStatus.OK).body("success!");
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
+    }
+
     @PostMapping("/users")
     public ResponseEntity<?> addUser(@RequestBody User user){
-        Integer result = userService.addUser(user);
-        if(result > 0) return ResponseEntity.status(HttpStatus.OK).body("success!");
+        boolean flag = userService.addUser(user);
+        if(flag) return ResponseEntity.status(HttpStatus.OK).body("success!");
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
     }
 
     @PostMapping("/stores")
     public ResponseEntity<?> addStore(@RequestBody Store store){
-        Integer result = userService.addStore(store);
-        if(result > 0) return ResponseEntity.status(HttpStatus.OK).body("success!");
+        boolean flag = userService.addStore(store);
+        if(flag) return ResponseEntity.status(HttpStatus.OK).body("success!");
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
     }

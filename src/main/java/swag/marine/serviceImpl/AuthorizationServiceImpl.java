@@ -17,26 +17,32 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
     @Transactional
     @Override
-    public Integer addUser(User user) {
+    public boolean addUser(User user) {
         Integer result = 0;
         if(!idDuplicateCheck(user.getUserId())){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             result = authorizationMapper.addUser(user);
         }
-        return result;
+        return result > 0;
     }
     @Transactional
     @Override
-    public Integer addStore(Store store) {
+    public boolean addStore(Store store) {
         Integer result = 0;
-        if(addUser(store) > 0){
+        if(addUser(store)){
             store.setStoreId(store.getUserId());
             result = authorizationMapper.addStore(store);
         }
-        return result;
+        return result > 0;
     }
     @Override
     public boolean idDuplicateCheck(String userId) {
         return authorizationMapper.idDuplicateCheck(userId) > 0;
+    }
+
+    @Override
+    public boolean login(User loginUser) {
+        User user = authorizationMapper.getUser(loginUser);
+        return passwordEncoder.matches(loginUser.getPassword(), user.getPassword());
     }
 }
