@@ -1,13 +1,12 @@
 package swag.marine.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import swag.marine.model.Store;
 import swag.marine.model.User;
 
 @Mapper
-public interface AuthorizationMapper {
+public interface UserMapper {
     Integer addUser(User user);
-    Integer addStore(Store store);
+    User getUser(String userId);
+    Integer updateUser(User user);
     Integer idDuplicateCheck(String userId);
-    User getUser(User user);
 }

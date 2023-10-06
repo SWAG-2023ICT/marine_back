@@ -12,8 +12,15 @@ public class SwaggerConfig {
     @Bean
     public GroupedOpenApi userAPI(){
         return GroupedOpenApi.builder()
-                .group("auth")
-                .pathsToMatch("/marine/auth/**")
+                .group("users")
+                .pathsToMatch("/marine/users/**")
+                .build();
+    }
+    @Bean
+    public GroupedOpenApi storeAPI(){
+        return GroupedOpenApi.builder()
+                .group("store")
+                .pathsToMatch("/marine/store/**")
                 .build();
     }
 
