@@ -1,11 +1,11 @@
 package swag.marine.service;
 
-import swag.marine.model.Store;
 import swag.marine.model.User;
 
-public interface AuthorizationService {
+public interface UserService {
     boolean addUser(User user);
-    boolean addStore(Store store);
+    User getUser(String userId);
+    boolean updateUser(User user);
+    boolean passwordCheck(User user);
     boolean idDuplicateCheck(String userId);
-    boolean login(User user);
 }
