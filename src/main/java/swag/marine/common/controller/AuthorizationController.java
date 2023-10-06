@@ -1,6 +1,7 @@
 package swag.marine.common.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,7 @@ import swag.marine.model.Store;
 import swag.marine.model.User;
 import swag.marine.serviceImpl.AuthorizationServiceImpl;
 
+@Slf4j
 @RequestMapping("/marine/auth")
 @RestController
 @RequiredArgsConstructor
@@ -24,6 +26,7 @@ public class AuthorizationController {
 
     @PostMapping("/users")
     public ResponseEntity<?> addUser(@RequestBody User user){
+        log.info("user : {}",user);
         boolean flag = userService.addUser(user);
         if(flag) return ResponseEntity.status(HttpStatus.OK).body("success!");
 

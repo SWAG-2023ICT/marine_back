@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import swag.marine.mapper.AuthorizationMapper;
+import swag.marine.mapper.DestinationMapper;
 import swag.marine.model.Store;
 import swag.marine.model.User;
 import swag.marine.service.AuthorizationService;
@@ -13,6 +14,7 @@ import swag.marine.service.AuthorizationService;
 @RequiredArgsConstructor
 public class AuthorizationServiceImpl implements AuthorizationService {
     private final AuthorizationMapper authorizationMapper;
+    private final DestinationMapper destinationMapper;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
@@ -21,7 +23,9 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         Integer result = 0;
         if(!idDuplicateCheck(user.getUserId())){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            result = authorizationMapper.addUser(user);
+            if(authorizationMapper.addUser(user) > 0){
+                result = destinationMapper.addDestination(user.getDestinations().get(0));
+            }
         }
         return result > 0;
     }
