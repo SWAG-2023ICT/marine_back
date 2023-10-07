@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="swag.marine.mapper.DestinationMapper">
+    <insert id="addDestination" parameterType="Destination">
+        INSERT INTO destination (destination_name, destination_address, default_status, user_id) VALUE (#{destination_name}, #{destination_address}, #{default_status}, #{user_id})
+    </insert>
+
+    <update id="updateDestination" parameterType="Destination">
+        UPDATE destination SET
+        destination_name = #{destination_name},
+        destination_address = #{destination_address},
+        default_status = #{default_status}
+        WHERE destination_id = #{destination_id}
+    </update>
+
+    <delete id="deleteDestination" parameterType="int">
+        DELETE FROM destination WHERE destination_id = #{destination_id}
+    </delete>
+
+</mapper>
