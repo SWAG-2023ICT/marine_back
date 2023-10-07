@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="swag.marine.mapper.PriceMapper">
+    <insert id="addPrice" parameterType="Price">
+        INSERT INTO price (unit, price_by_unit, product_id)
+        VALUE (#{unit}, #{price_by_unit}, #{product_id})
+    </insert>
+
+    <update id="updatePrice" parameterType="Price">
+        UPDATE price SET
+        unit = #{unit},
+        price_by_unit = #{price_by_unit},
+        WHERE price_id = #{price_id}
+    </update>
+
+    <delete id="deletePrice" parameterType="int">
+        DELETE FROM price WHERE price_id = #{price_id}
+    </delete>
+
+</mapper>
