@@ -3,14 +3,16 @@ package swag.marine.model;
 import lombok.Data;
 
 import java.sql.Blob;
+import java.util.List;
 
 @Data
 public class Product {
-    private int product_id;
+    private int productId;
     private String origin;
-    private String product_name;
-    private byte[] product_image;
+    private String productName;
+    private byte[] productImage;
     private String description;
-    private int product_status;
-    private int store_id;
+    private int productStatus;
+    private int storeId;
+    private List<Price> prices;
 }

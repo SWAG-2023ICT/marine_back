@@ -10,9 +10,10 @@ import swag.marine.model.Product;
 import swag.marine.service.PriceService;
 import swag.marine.service.ProductService;
 
+import java.util.List;
+
 @RequestMapping("/marine/product")
 @RestController
-@RequiredArgsConstructor
 public class ProductController {
     @Autowired
     ProductService productService;
@@ -20,9 +21,15 @@ public class ProductController {
     PriceService priceService;
 
     @PostMapping("/addProduct")
-    public ResponseEntity addProduct(@RequestBody Product product, @RequestBody Price price)  {
-        price.setProduct_id(product.getProduct_id());
-        if(productService.addProduct(product) == 1 && priceService.addPrice(price) == 1){
+    public ResponseEntity addProduct(@RequestBody Product product, @RequestBody List<Price> prices)  {
+        int result = 0;
+        for(Price price : prices){
+            price.setProductId(product.getProductId());
+                if(priceService.addPrice(price) == 1){
+                    result = 1;
+                }
+            }
+        if(productService.addProduct(product) == 1 && result  == 1){
             return ResponseEntity.status(HttpStatus.CREATED).build();
         }else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -30,18 +37,40 @@ public class ProductController {
 
     }
 
-    @PostMapping("/updateDestination")
-    public ResponseEntity updateProduct(@RequestBody Product product, @RequestBody Price price)  {
-        if(productService.updateProduct(product) == 1 && priceService.updatePrice(price) == 1){
+    @PostMapping("/updateProduct")
+    public ResponseEntity updateProduct(@RequestBody Product product, @RequestBody List<Price> prices)  {
+        int result = 0;
+        for(Price price : prices){
+            if(priceService.updatePrice(price)== 1){
+                result = 1;
+            }
+        }
+        if(productService.updateProduct(product) == 1 && result == 1){
             return ResponseEntity.status(HttpStatus.OK).build();
         }else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 
-    @PostMapping("/deleteDestination")
-    public ResponseEntity deleteProduct(@RequestParam int product_id, @RequestParam int price_id)  {
-        if(productService.deleteProduct(product_id) == 1 && priceService.deletePrice(price_id) == 1){
+    @PostMapping("/deleteProduct")
+    public ResponseEntity deleteProduct(@RequestParam int productId, @RequestParam int priceId)  {
+
+        if(productService.deleteProduct(productId) == 1 && priceService.deletePrice(priceId) == 1){
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+    @PostMapping("/selectAllPriceByProductId")
+    public List<Price> selectAllPriceByProductId(@RequestParam int productId)  {
+        return priceService.selectAllPriceByProductId(productId);
+    }
+
+    @PostMapping("/deleteAllPriceByProductId")
+    public ResponseEntity deleteAllPriceByProductId(@RequestParam int productId)  {
+
+        if(priceService.deletePrice(productId) == 1){
             return ResponseEntity.status(HttpStatus.OK).build();
         }else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
