@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="swag.marine.mapper.ProductMapper">
+    <insert id="addProduct" parameterType="Product">
+        INSERT INTO product (origin, product_name, product_image, description, product_status, store_id)
+        VALUE (#{origin}, #{product_name}, #{product_image}, #{description}, #{product_status}, #{store_id})
+    </insert>
+
+    <update id="updateProduct" parameterType="Product">
+        UPDATE product SET
+        origin = #{origin},
+        product_name = #{product_name},
+        product_image = #{product_image}
+        description = #{description},
+        product_status = #{product_status}
+        WHERE product_id = #{product_id}
+    </update>
+
+    <delete id="deleteProduct" parameterType="int">
+        DELETE FROM product WHERE product_id = #{product_id}
+    </delete>
+
+</mapper>
