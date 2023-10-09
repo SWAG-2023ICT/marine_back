@@ -17,8 +17,8 @@ public class DestinationServiceImpl  implements DestinationService {
 
     @Override
     public Integer addDestination(Destination destination) {
-        if(destination.getDestination_address() == null){
-            destination.setDestination_address(destination.getUser_id()+"_기본 배송지");
+        if(destination.getDestinationAddress() == null){
+            destination.setDestinationAddress(destination.getUserId()+"_기본 배송지");
         }
         if(destinationMapper.addDestination(destination) > 0){
             return 1;
@@ -39,8 +39,8 @@ public class DestinationServiceImpl  implements DestinationService {
     }
 
     @Override
-    public Integer deleteDestination(int destination_id) {
-        if (destinationMapper.deleteDestination(destination_id) > 0) {
+    public Integer deleteDestination(int destinationId) {
+        if (destinationMapper.deleteDestination(destinationId) > 0) {
             return 1;
         } else {
             return 0;

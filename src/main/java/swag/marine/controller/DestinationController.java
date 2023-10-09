@@ -35,8 +35,8 @@ public class DestinationController {
     }
 
     @PostMapping("/deleteDestination")
-    public ResponseEntity deleteDestination(@RequestParam int destination_id)  {
-        if(destinationService.deleteDestination(destination_id) == 1){
+    public ResponseEntity deleteDestination(@RequestParam int destinationId)  {
+        if(destinationService.deleteDestination(destinationId) == 1){
             return ResponseEntity.status(HttpStatus.OK).build();
         }else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

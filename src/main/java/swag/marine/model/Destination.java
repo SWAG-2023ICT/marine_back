@@ -4,13 +4,13 @@ import lombok.Data;
 
 @Data
 public class Destination {
-    private int destination_id;
+    private int destinationId;
 
-    private String destination_name;
+    private String destinationName;
 
-    private String destination_address;
+    private String destinationAddress;
 
-    private int default_status;
+    private int defaultStatus;
 
-    private String user_id;
+    private String userId;
 }
