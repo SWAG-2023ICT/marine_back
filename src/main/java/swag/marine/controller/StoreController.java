@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 import swag.marine.model.Store;
 import swag.marine.serviceImpl.StoreServiceImpl;
 
-@RequestMapping("/marine/store")
+@RequestMapping("/marine/stores")
 @RequiredArgsConstructor
 @RestController
 public class StoreController {
     private final StoreServiceImpl storeService;
-    @PostMapping("/stores")
+    @PostMapping("")
     public ResponseEntity<?> addStore(@RequestBody Store store){
         boolean flag = storeService.addStore(store);
         if(flag) return ResponseEntity.status(HttpStatus.OK).body("success!");

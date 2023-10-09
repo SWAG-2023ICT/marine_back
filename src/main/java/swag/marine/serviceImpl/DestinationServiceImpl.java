@@ -11,7 +11,7 @@ import swag.marine.service.DestinationService;
 @Slf4j
 @Transactional
 @Service("DestinationService")
-public class DestinationServiceImpl  implements DestinationService {
+public class DestinationServiceImpl implements DestinationService {
     @Autowired
     DestinationMapper destinationMapper;
 
@@ -45,5 +45,6 @@ public class DestinationServiceImpl  implements DestinationService {
         } else {
             return 0;
         }
+
     }
 }

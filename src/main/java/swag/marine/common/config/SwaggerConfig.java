@@ -23,7 +23,20 @@ public class SwaggerConfig {
                 .pathsToMatch("/marine/store/**")
                 .build();
     }
-
+    @Bean
+    public GroupedOpenApi destinationAPI(){
+        return GroupedOpenApi.builder()
+                .group("destination")
+                .pathsToMatch("/marine/destination/**")
+                .build();
+    }
+    @Bean
+    public GroupedOpenApi productAPI(){
+        return GroupedOpenApi.builder()
+                .group("product")
+                .pathsToMatch("/marine/product/**")
+                .build();
+    }
     @Bean
     public OpenAPI marineAPI() {
         return new OpenAPI()
