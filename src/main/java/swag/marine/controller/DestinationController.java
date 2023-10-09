@@ -10,7 +10,6 @@ import swag.marine.service.DestinationService;
 
 @RequestMapping("/marine/destination")
 @RestController
-@RequiredArgsConstructor
 public class DestinationController {
     @Autowired
     DestinationService destinationService;

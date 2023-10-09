@@ -14,7 +14,6 @@ import java.util.List;
 
 @RequestMapping("/marine/product")
 @RestController
-@RequiredArgsConstructor
 public class ProductController {
     @Autowired
     ProductService productService;
