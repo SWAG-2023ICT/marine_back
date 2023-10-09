@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.Pattern;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @Data
 public class Store extends User{
     private String storeId;

@@ -1,4 +1,4 @@
-package swag.marine.common.controller;
+package swag.marine.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
