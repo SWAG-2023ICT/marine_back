@@ -6,4 +6,5 @@ import swag.marine.model.Store;
 @Mapper
 public interface StoreMapper {
     Integer addStore(Store store);
+    Store findStoreById(String storeId);
 }

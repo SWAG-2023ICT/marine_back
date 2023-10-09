@@ -4,4 +4,5 @@ import swag.marine.model.Store;
 
 public interface StoreService {
     boolean addStore(Store store);
+    Store findStoreById(String storeId);
 }

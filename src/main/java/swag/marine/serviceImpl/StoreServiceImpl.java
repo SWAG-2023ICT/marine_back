@@ -15,4 +15,8 @@ public class StoreServiceImpl implements StoreService {
         Integer result = storeMapper.addStore(store);
         return result > 0;
     }
+    @Override
+    public Store findStoreById(String storeId) {
+        return storeMapper.findStoreById(storeId);
+    }
 }

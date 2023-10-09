@@ -18,8 +18,8 @@ public class SwaggerConfig {
     @Bean
     public GroupedOpenApi storeAPI(){
         return GroupedOpenApi.builder()
-                .group("store")
-                .pathsToMatch("/marine/store/**")
+                .group("stores")
+                .pathsToMatch("/marine/stores/**")
                 .build();
     }
     @Bean
