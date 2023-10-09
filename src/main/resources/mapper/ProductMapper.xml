@@ -4,21 +4,21 @@
 <mapper namespace="swag.marine.mapper.ProductMapper">
     <insert id="addProduct" parameterType="Product">
         INSERT INTO product (origin, product_name, product_image, description, product_status, store_id)
-        VALUE (#{origin}, #{product_name}, #{product_image}, #{description}, #{product_status}, #{store_id})
+        VALUE (#{origin}, #{productName}, #{productImage}, #{description}, #{productStatus}, #{storeId})
     </insert>
 
     <update id="updateProduct" parameterType="Product">
         UPDATE product SET
         origin = #{origin},
-        product_name = #{product_name},
-        product_image = #{product_image}
+        product_name = #{productName},
+        product_image = #{productImage}
         description = #{description},
-        product_status = #{product_status}
-        WHERE product_id = #{product_id}
+        product_status = #{productStatus}
+        WHERE product_id = #{productId}
     </update>
 
     <delete id="deleteProduct" parameterType="int">
-        DELETE FROM product WHERE product_id = #{product_id}
+        DELETE FROM product WHERE product_id = #{productId}
     </delete>
 
 </mapper>
