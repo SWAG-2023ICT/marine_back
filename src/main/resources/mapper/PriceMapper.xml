@@ -4,18 +4,18 @@
 <mapper namespace="swag.marine.mapper.PriceMapper">
     <insert id="addPrice" parameterType="Price">
         INSERT INTO price (unit, price_by_unit, product_id)
-        VALUE (#{unit}, #{price_by_unit}, #{product_id})
+        VALUE (#{unit}, #{priceByUnit}, #{productId})
     </insert>
 
     <update id="updatePrice" parameterType="Price">
         UPDATE price SET
         unit = #{unit},
-        price_by_unit = #{price_by_unit},
-        WHERE price_id = #{price_id}
+        price_by_unit = #{priceByUnit},
+        WHERE price_id = #{priceId}
     </update>
 
     <delete id="deletePrice" parameterType="int">
-        DELETE FROM price WHERE price_id = #{price_id}
+        DELETE FROM price WHERE price_id = #{priceId}
     </delete>
 
     <select id="selectAllPriceByProductId" parameterType="int">

@@ -3,19 +3,19 @@
 
 <mapper namespace="swag.marine.mapper.DestinationMapper">
     <insert id="addDestination" parameterType="Destination">
-        INSERT INTO destination (destination_name, destination_address, default_status, user_id) VALUE (#{destination_name}, #{destination_address}, #{default_status}, #{user_id})
+        INSERT INTO destination (destination_name, destination_address, default_status, user_id) VALUE (#{destinationName}, #{destinationAddress}, #{defaultStatus}, #{userId})
     </insert>
 
     <update id="updateDestination" parameterType="Destination">
         UPDATE destination SET
-        destination_name = #{destination_name},
-        destination_address = #{destination_address},
-        default_status = #{default_status}
-        WHERE destination_id = #{destination_id}
+        destination_name = #{destinationName},
+        destination_address = #{destinationAddress},
+        default_status = #{defaultStatus}
+        WHERE destination_id = #{destinationId}
     </update>
 
     <delete id="deleteDestination" parameterType="int">
-        DELETE FROM destination WHERE destination_id = #{destination_id}
+        DELETE FROM destination WHERE destination_id = #{destinationId}
     </delete>
 
 </mapper>
