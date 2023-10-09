@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import swag.marine.mapper.DestinationMapper;
 import swag.marine.mapper.UserMapper;
+import swag.marine.model.Destination;
 import swag.marine.model.User;
 import swag.marine.service.UserService;
 
@@ -12,7 +14,7 @@ import swag.marine.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
-//    private final DestinationMapper destinationMapper;
+    private final DestinationMapper destinationMapper;
     private final PasswordEncoder passwordEncoder;
     @Transactional
     @Override
@@ -21,9 +23,9 @@ public class UserServiceImpl implements UserService {
         if(!idDuplicateCheck(user.getUserId())){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             if(userMapper.addUser(user) > 0){
-//                Destination destination = user.getDestinations().get(0);
-//                destination.setUserId(user.getUserId());
-//                result = destinationMapper.addDestination(destination);
+                Destination destination = user.getDestinations().get(0);
+                destination.setUserId(user.getUserId());
+                result = destinationMapper.addDestination(destination);
             }
         }
         return result > 0;

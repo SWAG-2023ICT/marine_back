@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import swag.marine.model.Store;
-import swag.marine.serviceImpl.StoreServiceImpl;
-
+import swag.marine.service.StoreService;
 @RequestMapping("/marine/stores")
 @RequiredArgsConstructor
 @RestController
 public class StoreController {
-    private final StoreServiceImpl storeService;
+    private final StoreService storeService;
     @PostMapping("")
     public ResponseEntity<?> addStore(@RequestBody Store store){
         boolean flag = storeService.addStore(store);

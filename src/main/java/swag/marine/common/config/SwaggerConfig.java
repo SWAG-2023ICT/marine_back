@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SwaggerConfig {
-
     @Bean
     public GroupedOpenApi userAPI(){
         return GroupedOpenApi.builder()
@@ -37,6 +36,13 @@ public class SwaggerConfig {
                 .pathsToMatch("/marine/product/**")
                 .build();
     }
+    @Bean GroupedOpenApi orderAPI(){
+        return GroupedOpenApi.builder()
+                .group("orders")
+                .pathsToMatch("/marine/orders/**")
+                .build();
+    }
+
     @Bean
     public OpenAPI marineAPI() {
         return new OpenAPI()
