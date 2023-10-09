@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class Price {
-    private int price_id;
+    private int priceId;
     private String unit;
-    private int price_by_unit;
-    private int product_id;
+    private int priceByUnit;
+    private int productId;
 }

@@ -7,5 +7,5 @@ import swag.marine.model.Product;
 public interface ProductService {
     Integer addProduct(Product product);
     Integer updateProduct(Product product);
-    Integer deleteProduct(int product_id);
+    Integer deleteProduct(int productId);
 }

@@ -7,6 +7,8 @@ import swag.marine.mapper.PriceMapper;
 import swag.marine.model.Price;
 import swag.marine.service.PriceService;
 
+import java.util.List;
+
 @Transactional
 @Service("PriceService")
 public class PriceServiceImpl implements PriceService {
@@ -32,8 +34,22 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public Integer deletePrice(int price_id) {
-        if(priceMapper.deletePrice(price_id) > 0){
+    public Integer deletePrice(int priceId) {
+        if(priceMapper.deletePrice(priceId) > 0){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+    @Override
+    public List<Price> selectAllPriceByProductId(int productId) {
+        return priceMapper.selectAllPriceByProductId(productId);
+    }
+
+    @Override
+    public Integer deleteAllPriceByProductId(int productId) {
+        if(priceMapper.deleteAllPriceByProductId(productId) > 0){
             return 1;
         }else{
             return 0;

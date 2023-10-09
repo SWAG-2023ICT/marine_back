@@ -33,8 +33,8 @@ public class ProductServiceImpl  implements ProductService {
     }
 
     @Override
-    public Integer deleteProduct(int product_id) {
-        if(productMapper.deleteProduct(product_id) > 0){
+    public Integer deleteProduct(int productId) {
+        if(productMapper.deleteProduct(productId) > 0){
             return 1;
         }else{
             return 0;

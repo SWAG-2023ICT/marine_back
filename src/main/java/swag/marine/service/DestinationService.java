@@ -8,6 +8,6 @@ public interface DestinationService {
     Integer addDestination(Destination destination);
     Integer updateDestination(Destination destination);
 
-    Integer deleteDestination(int destination_id);
+    Integer deleteDestination(int destinationId);
 }
 
