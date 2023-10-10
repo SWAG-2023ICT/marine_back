@@ -2,8 +2,41 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="swag.marine.mapper.StoreMapper">
+    <resultMap id="defaultStore" type="Store">
+        <id property="storeId" column="store_id"/>
+        <result property="storeName" column="store_name"/>
+        <result property="storePhoneNumber" column="store_phone_number"/>
+        <result property="storeAddress" column="store_address"/>
+        <result property="storeImage" column="store_image"/>
+        <result property="sellerId" column="seller_id"/>
+        <collection property="products" ofType="Product">
+            <id property="productId" column="product_id"/>
+            <result property="origin" column="origin"/>
+            <result property="productName" column="product_name"/>
+            <result property="productImage" column="product_image"/>
+            <result property="description" column="description"/>
+            <result property="productStatus" column="product_status"/>
+            <collection property="prices" ofType="Price">
+                <id property="priceId" column="price_id"/>
+                <result property="unit" column="unit"/>
+                <result property="priceByUnit" column="price_by_unit"/>
+            </collection>
+        </collection>
+    </resultMap>
+
     <insert id="addStore" parameterType="Store">
         INSERT INTO store
         VALUES ( #{storeId}, #{storeName},#{storePhoneNumber},#{storeAddress},#{storeImage},#{sellerId})
     </insert>
+
+    <select id="getStoreById" parameterType="string" resultMap="defaultStore">
+        SELECT *
+        FROM store s LEFT JOIN product p ON s.store_id = p.store_id
+        LEFT JOIN price pr ON p.product_id = pr.product_id
+    </select>
+
+    <select id="getAllStores" resultType="List">
+        SELECT *
+        FROM store
+    </select>
 </mapper>

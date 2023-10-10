@@ -1,20 +1,26 @@
 package swag.marine.model;
 
-import lombok.Data;
+import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
-@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Order {
-    Integer ordersId;
-    Date orderDtm;
-    int totalPrice;
-    int zipCode;
-    String deliveryPhoneNumber;
-    String deliveryTargetName;
-    boolean deliveryStatus;
-    String deliveryInvoice;
-    String orderUserId;
-    String storeId;
-    Integer destinationId;
+    private Integer ordersId;
+    private Date orderDtm;
+    private int totalPrice;
+    private String deliveryPhoneNumber;
+    private String deliveryTargetName;
+    private int deliveryStatus;
+    private int orderStatus;
+    private String deliveryInvoice;
+    private String orderUserId;
+    private String storeId;
+    private Integer destinationId;
+    private List<Product> products;
 }

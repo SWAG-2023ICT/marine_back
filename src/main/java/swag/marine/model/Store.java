@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
@@ -15,4 +16,6 @@ public class Store extends User{
     private String storeAddress;
     private byte[] storeImage;
     private String sellerId;
+    private List<Order> oreOrders;
+    private List<Product> products;
 }

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="swag.marine.mapper.OrderMapper">
+    <resultMap id="defaultOrder" type="Order">
+        <id property="orderId" column="order_id"/>
+        <result property="orderDtm" column="order_dtm"/>
+        <result property="totalPrice" column="total_price"/>
+        <result property="deliveryPhoneNumber" column="delivery_phone_number"/>
+        <result property="deliveryTargetName" column="delivery_target_name"/>
+        <result property="deliveryStatus" column="delivery_status"/>
+        <result property="orderStatus" column="order_status"/>
+        <result property="delivery_invoice" column="deliveryInvoice"/>
+        <result property="orderUserId" column="order_user_id"/>
+        <result property="storeId" column="storeId"/>
+        <result property="destinationId" column="destination_id"/>
+        <collection property="products" ofType="Product">
+            <id property="productId" column="product_id"/>
+            <result property="origin" column="origin"/>
+            <result property="productName" column="product_name"/>
+            <result property="productImage" column="product_image"/>
+            <result property="description" column="description"/>
+            <result property="productStatus" column="product_status"/>
+            <collection property="prices" ofType="Price">
+                <id property="priceId" column="price_id"/>
+                <result property="unit" column="unit"/>
+                <result property="priceByUnit" column="price_by_unit"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <sql id="selectOrders">
+        SELECT o.*,od.amount,p.*,pr.*
+        FROM orders o
+        INNER JOIN orders_detail od ON o.orders_id = od.orders_id
+        INNER JOIN product p ON od.product_id = p.product_id
+        LEFT JOIN price pr ON p.product_id = pr.product_id
+    </sql>
+
+    <insert id="addOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="ordersId">
+        INSERT INTO orders (order_dtm, total_price, delivery_phone_number, delivery_target_name,
+                     delivery_status, order_status, order_user_id, store_id, destination_id)
+        VALUES (now(),#{totalPrice},#{deliveryPhoneNumber},#{deliveryTargetName},
+                    1,1,#{orderUserId},#{storeId},#{destinationId})
+    </insert>
+
+    <insert id="addOrderDetail" parameterType="List">
+        INSERT INTO orders_detail
+        <foreach collection="orderDetails" item="item" separator=",">
+            VALUES (#{item.ordersId},#{item.productId},#{item.amount} )
+        </foreach>
+    </insert>
+
+    <select id="getOrdersByOrderId" parameterType="int" resultMap="defaultOrder">
+        <include refid="selectOrders"/>
+        WHERE o.orders_id = #{orderId}
+    </select>
+
+    <select id="getOrdersByUsersId" parameterType="string" resultMap="defaultOrder">
+        <include refid="selectOrders"/>
+        WHERE o.order_user_id = #{id}
+    </select>
+
+    <select id="getOrdersByStoreId" parameterType="string" resultMap="defaultOrder">
+        <include refid="selectOrders"/>
+        WHERE o.store_id = #{id}
+    </select>
+</mapper>

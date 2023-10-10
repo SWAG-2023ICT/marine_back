@@ -10,7 +10,7 @@
     <update id="updatePrice" parameterType="Price">
         UPDATE price SET
         unit = #{unit},
-        price_by_unit = #{priceByUnit},
+        price_by_unit = #{priceByUnit}
         WHERE price_id = #{priceId}
     </update>
 
@@ -23,6 +23,6 @@
     </select>
 
     <delete id="deleteAllPriceByProductId" parameterType="int">
-        DELECT FROM price WHERE product_id = #{productId}
+        DELETE FROM price WHERE product_id = #{productId}
     </delete>
 </mapper>
