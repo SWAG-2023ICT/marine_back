@@ -6,6 +6,8 @@ import swag.marine.mapper.StoreMapper;
 import swag.marine.model.Store;
 import swag.marine.service.StoreService;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class StoreServiceImpl implements StoreService {
@@ -17,6 +19,10 @@ public class StoreServiceImpl implements StoreService {
     }
     @Override
     public Store findStoreById(String storeId) {
-        return storeMapper.findStoreById(storeId);
+        return storeMapper.getStoreById(storeId);
+    }
+    @Override
+    public List<Store> getAllStores() {
+        return storeMapper.getAllStores();
     }
 }

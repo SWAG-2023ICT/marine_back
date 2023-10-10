@@ -29,7 +29,15 @@
         </collection>
     </resultMap>
 
-    <insert id="addOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="orderId">
+    <sql id="selectOrders">
+        SELECT o.*,od.amount,p.*,pr.*
+        FROM orders o
+        INNER JOIN orders_detail od ON o.orders_id = od.orders_id
+        INNER JOIN product p ON od.product_id = p.product_id
+        LEFT JOIN price pr ON p.product_id = pr.product_id
+    </sql>
+
+    <insert id="addOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="ordersId">
         INSERT INTO orders (order_dtm, total_price, delivery_phone_number, delivery_target_name,
                      delivery_status, order_status, order_user_id, store_id, destination_id)
         VALUES (now(),#{totalPrice},#{deliveryPhoneNumber},#{deliveryTargetName},
@@ -39,25 +47,22 @@
     <insert id="addOrderDetail" parameterType="List">
         INSERT INTO orders_detail
         <foreach collection="orderDetails" item="item" separator=",">
-            VALUES (#{item.orderId},#{item.productId},#{item.amount} )
+            VALUES (#{item.ordersId},#{item.productId},#{item.amount} )
         </foreach>
     </insert>
 
-    <select id="findOrdersById" parameterType="int" resultMap="defaultOrder">
-        SELECT o.*,od.amount,p.*,pr.*
-        FROM orders o INNER JOIN orders_detail od
-        ON o.orders_id = od.orders_id
-        INNER JOIN product p ON od.product_id = p.product_id
-        LEFT JOIN price pr ON p.product_id = pr.product_id
+    <select id="getOrdersByOrderId" parameterType="int" resultMap="defaultOrder">
+        <include refid="selectOrders"/>
         WHERE o.orders_id = #{orderId}
     </select>
 
-    <select id="findOrdersByUserId" parameterType="string" resultMap="defaultOrder">
-        SELECT o.*,od.amount,p.*,pr.*
-        FROM orders o INNER JOIN orders_detail od
-        ON o.orders_id = od.orders_id
-        INNER JOIN product p ON od.product_id = p.product_id
-        LEFT JOIN price pr ON p.product_id = pr.product_id
-        WHERE o.order_user_id = #{userId}
+    <select id="getOrdersByUsersId" parameterType="string" resultMap="defaultOrder">
+        <include refid="selectOrders"/>
+        WHERE o.order_user_id = #{id}
+    </select>
+
+    <select id="getOrdersByStoreId" parameterType="string" resultMap="defaultOrder">
+        <include refid="selectOrders"/>
+        WHERE o.store_id = #{id}
     </select>
 </mapper>

@@ -1,10 +1,12 @@
 package swag.marine.model;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 @Builder
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class OrderDetail {
     int ordersId;
     int productId;

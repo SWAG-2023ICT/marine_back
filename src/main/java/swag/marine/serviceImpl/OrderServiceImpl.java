@@ -16,12 +16,12 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
     @Override
-    public Order findOrderById(int orderId) {
-        return orderMapper.findOrderById(orderId);
+    public Order getOrderByOrderId(int orderId) {
+        return orderMapper.getOrderByOrderId(orderId);
     }
     @Override
-    public List<Order> findOrdersByUserId(String userId) {
-        return orderMapper.findOrdersByUserId(userId);
+    public List<Order> getOrdersById(String userId) {
+        return orderMapper.getOrdersById(userId);
     }
     @Override
     public boolean addOrders(Order order) {
@@ -32,7 +32,8 @@ public class OrderServiceImpl implements OrderService {
         Integer result = orderMapper.addOrder(order);
         if(result > 0){
             for(Product p : order.getProducts()){
-                orderDetails.add(OrderDetail.builder()
+                orderDetails.add(
+                        OrderDetail.builder()
                         .ordersId(order.getOrdersId())
                         .productId(p.getProductId())
                         .amount(p.getAmount())

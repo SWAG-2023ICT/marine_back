@@ -29,9 +29,14 @@
         VALUES ( #{storeId}, #{storeName},#{storePhoneNumber},#{storeAddress},#{storeImage},#{sellerId})
     </insert>
 
-    <select id="findStoreById" parameterType="string" resultMap="defaultStore">
+    <select id="getStoreById" parameterType="string" resultMap="defaultStore">
         SELECT *
         FROM store s LEFT JOIN product p ON s.store_id = p.store_id
         LEFT JOIN price pr ON p.product_id = pr.product_id
+    </select>
+
+    <select id="getAllStores" resultType="List">
+        SELECT *
+        FROM store
     </select>
 </mapper>

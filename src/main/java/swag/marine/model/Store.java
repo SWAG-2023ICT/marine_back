@@ -16,6 +16,6 @@ public class Store extends User{
     private String storeAddress;
     private byte[] storeImage;
     private String sellerId;
-    List<Order> oreOrders;
-    List<Product> products;
+    private List<Order> oreOrders;
+    private List<Product> products;
 }

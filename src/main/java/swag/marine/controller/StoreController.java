@@ -6,11 +6,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import swag.marine.model.Store;
 import swag.marine.service.StoreService;
+
+import java.util.List;
+
 @RequestMapping("/marine/stores")
 @RequiredArgsConstructor
 @RestController
 public class StoreController {
     private final StoreService storeService;
+    @GetMapping("")
+    public ResponseEntity<List<Store>> getAllStores(){
+        return ResponseEntity.status(HttpStatus.OK).body(storeService.getAllStores());
+    }
 
     @GetMapping("/{storeId}")
     public ResponseEntity<?> findStoreById(@PathVariable String storeId){

@@ -13,11 +13,15 @@ import swag.marine.service.OrderService;
 @RestController
 public class OrderController {
     private final OrderService orderService;
-    @GetMapping("/{userId}/{orderId}")
-    public ResponseEntity<?> getOrder(@PathVariable String userId, @PathVariable Integer orderId){
-        if(orderId == null) return ResponseEntity.status(HttpStatus.OK).body(orderService.findOrdersByUserId(userId));
-
-        return ResponseEntity.status(HttpStatus.OK).body(orderService.findOrderById(orderId));
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getOrderByUserId(@PathVariable String id){
+        Integer orderId = null;
+        try {
+            orderId = Integer.parseInt(id);
+        } catch (NumberFormatException exception){
+            return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrdersById(id));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrderByOrderId(orderId));
     }
     @PostMapping("")
     public ResponseEntity<?> addOrders(@RequestBody Order order){

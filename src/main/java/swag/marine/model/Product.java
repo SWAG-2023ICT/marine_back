@@ -12,7 +12,7 @@ public class Product {
     private byte[] productImage;
     private String description;
     private int productStatus;
-    private int storeId;
+    private String storeId;
     private int amount;
     private List<Price> prices;
 }

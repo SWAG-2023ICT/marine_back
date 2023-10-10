@@ -13,7 +13,6 @@ import swag.marine.service.ProductService;
 public class ProductServiceImpl  implements ProductService {
     @Autowired
     ProductMapper productMapper;
-
     @Override
     public Integer addProduct(Product product) {
         if(productMapper.addProduct(product) > 0){
@@ -22,7 +21,6 @@ public class ProductServiceImpl  implements ProductService {
             return 0;
         }
     }
-
     @Override
     public Integer updateProduct(Product product) {
         if(productMapper.updateProduct(product) > 0){
@@ -31,7 +29,6 @@ public class ProductServiceImpl  implements ProductService {
             return 0;
         }
     }
-
     @Override
     public Integer deleteProduct(int productId) {
         if(productMapper.deleteProduct(productId) > 0){
