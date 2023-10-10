@@ -6,7 +6,6 @@ import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = false)
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
