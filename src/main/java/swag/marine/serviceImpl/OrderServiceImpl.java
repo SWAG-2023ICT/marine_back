@@ -16,12 +16,16 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
     @Override
-    public Order getOrderByOrderId(int orderId) {
-        return orderMapper.getOrderByOrderId(orderId);
+    public Order getOrdersByOrderId(int orderId) {
+        return orderMapper.getOrdersByOrderId(orderId);
     }
     @Override
-    public List<Order> getOrdersById(String userId) {
-        return orderMapper.getOrdersById(userId);
+    public List<Order> getOrdersByUserId(String userId) {
+        return orderMapper.getOrdersByUserId(userId);
+    }
+    @Override
+    public List<Order> getOrdersByStoreId(String storeId) {
+        return orderMapper.getOrdersByStoreId(storeId);
     }
     @Override
     public boolean addOrders(Order order) {

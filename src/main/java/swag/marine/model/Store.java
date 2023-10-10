@@ -1,13 +1,16 @@
 package swag.marine.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = false)
-@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Store extends User{
     private String storeId;
     private String storeName;
