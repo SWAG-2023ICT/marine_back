@@ -35,7 +35,7 @@
         LEFT JOIN price pr ON p.product_id = pr.product_id
     </select>
 
-    <select id="getAllStores" resultType="List">
+    <select id="getAllStores" resultMap="defaultStore">
         SELECT *
         FROM store
     </select>

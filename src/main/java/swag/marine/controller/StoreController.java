@@ -18,7 +18,6 @@ public class StoreController {
     public ResponseEntity<List<Store>> getAllStores(){
         return ResponseEntity.status(HttpStatus.OK).body(storeService.getAllStores());
     }
-
     @GetMapping("/{storeId}")
     public ResponseEntity<?> findStoreById(@PathVariable String storeId){
         Store store = storeService.findStoreById(storeId);

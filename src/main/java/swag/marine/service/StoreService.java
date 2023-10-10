@@ -1,6 +1,5 @@
 package swag.marine.service;
 
-import org.springframework.http.ResponseEntity;
 import swag.marine.model.Store;
 
 import java.util.List;
