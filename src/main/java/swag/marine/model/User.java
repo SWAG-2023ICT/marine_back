@@ -1,13 +1,15 @@
 package swag.marine.model;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.Data;
+import lombok.*;
 
 import javax.validation.constraints.Pattern;
 import java.util.List;
 
-@Data
+@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class User {
     private String userId;
     private String password;

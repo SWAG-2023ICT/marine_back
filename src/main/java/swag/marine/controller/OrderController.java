@@ -7,21 +7,24 @@ import org.springframework.web.bind.annotation.*;
 import swag.marine.model.Order;
 import swag.marine.service.OrderService;
 
+import java.util.List;
 
 @RequestMapping("/marine/orders")
 @RequiredArgsConstructor
 @RestController
 public class OrderController {
     private final OrderService orderService;
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getOrderByUserId(@PathVariable String id){
-        Integer orderId = null;
-        try {
-            orderId = Integer.parseInt(id);
-        } catch (NumberFormatException exception){
-            return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrdersById(id));
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrderByOrderId(orderId));
+    @GetMapping("/{orderId}")
+    public ResponseEntity<Order>getOrderByOrderId(@PathVariable Integer orderId){
+        return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrdersByOrderId(orderId));
+    }
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<List<Order>> getOrderByUserId(@PathVariable String userId){
+        return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrdersByUserId(userId));
+    }
+    @GetMapping("/stores/{storeId}")
+    public ResponseEntity<List<Order>> getOrderByStoreId(@PathVariable String storeId){
+        return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrdersByStoreId(storeId));
     }
     @PostMapping("")
     public ResponseEntity<?> addOrders(@RequestBody Order order){
