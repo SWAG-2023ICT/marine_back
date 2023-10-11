@@ -19,7 +19,6 @@ import swag.marine.service.DestinationService;
 public class DestinationController {
     @Autowired
     DestinationService destinationService;
-
     @Operation(summary = "주소 추가",description = "사용자가 주소를 추가합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201",description = "주소가 정상적으로 추가되었습니다.",
@@ -59,7 +58,7 @@ public class DestinationController {
                     content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/deleteDestination")
-    public ResponseEntity deleteDestination(@RequestParam int destinationId) {
+    public ResponseEntity deleteDestination(@RequestParam int destinationId){
         if(destinationService.deleteDestination(destinationId) == 1){
             return ResponseEntity.status(HttpStatus.OK).build();
         }else{
