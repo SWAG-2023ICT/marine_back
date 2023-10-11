@@ -18,5 +18,7 @@
     <delete id="deleteDestination" parameterType="int">
         DELETE FROM destination WHERE destination_id = #{destinationId}
     </delete>
-
+    <select id="selectByUserId" parameterType="String">
+        SELECT * FROM destination WHERE user_id = #{userId}
+    </select>
 </mapper>

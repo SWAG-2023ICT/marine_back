@@ -8,6 +8,8 @@ import swag.marine.mapper.DestinationMapper;
 import swag.marine.model.Destination;
 import swag.marine.service.DestinationService;
 
+import java.util.List;
+
 @Slf4j
 @Transactional
 @Service("DestinationService")
@@ -18,7 +20,11 @@ public class DestinationServiceImpl implements DestinationService {
     @Override
     public Integer addDestination(Destination destination) {
         if(destination.getDestinationAddress() == null){
-            destination.setDestinationAddress(destination.getUserId()+"_기본 배송지");
+            int num = 0;
+            if(!selectByUserId(destination.getUserId()).isEmpty()){
+                num = selectByUserId(destination.getUserId()).size();
+            }
+            destination.setDestinationAddress("배송지-" + num);
         }
         if(destinationMapper.addDestination(destination) > 0){
             return 1;
@@ -46,5 +52,10 @@ public class DestinationServiceImpl implements DestinationService {
             return 0;
         }
 
+    }
+
+    @Override
+    public List<Destination> selectByUserId(String userId) {
+        return destinationMapper.selectByUserId(userId);
     }
 }
