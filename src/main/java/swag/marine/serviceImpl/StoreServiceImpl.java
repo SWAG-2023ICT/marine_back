@@ -19,7 +19,10 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public boolean addStore(Store store) {
         Integer result = userMapper.addUser(store);
-        if(result > 0) result = storeMapper.addStore(store);
+        if(result > 0) {
+            store.setSellerId(store.getUserId());
+            result = storeMapper.addStore(store);
+        }
         return result > 0;
     }
     @Override
