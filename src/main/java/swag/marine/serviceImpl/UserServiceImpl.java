@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
 //        if(user == null) throw new RuntimeException(); custom exception 생성.
         return user;
     }
+    @Transactional
     @Override
     public boolean updateUser(User loginUser) {
         Integer result = 0;

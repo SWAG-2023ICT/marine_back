@@ -2,6 +2,7 @@ package swag.marine.serviceImpl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import swag.marine.mapper.OrderMapper;
 import swag.marine.model.Order;
 import swag.marine.model.OrderDetail;
@@ -27,6 +28,8 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getOrdersByStoreId(String storeId) {
         return orderMapper.getOrdersByStoreId(storeId);
     }
+
+    @Transactional
     @Override
     public boolean addOrders(Order order) {
         List<OrderDetail> orderDetails = new ArrayList<>();
