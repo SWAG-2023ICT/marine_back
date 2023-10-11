@@ -40,4 +40,10 @@
         FROM user
         WHERE user_id = #{userId}
     </select>
+
+    <select id="isStore" parameterType="string" resultType="int">
+        SELECT count(store_id)
+        FROM store
+        WHERE seller_id = #{sellerId}
+    </select>
 </mapper>

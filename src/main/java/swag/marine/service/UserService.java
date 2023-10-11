@@ -8,4 +8,5 @@ public interface UserService {
     boolean updateUser(User user);
     boolean passwordCheck(User user);
     boolean idDuplicateCheck(String userId);
+    boolean isStore(String sellerId);
 }
