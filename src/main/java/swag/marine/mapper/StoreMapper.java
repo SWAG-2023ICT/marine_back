@@ -9,5 +9,5 @@ import java.util.List;
 public interface StoreMapper {
     Integer addStore(Store store);
     Store getStoreById(String storeId);
-    List<Store> getAllStores();
+    List<Store> getAllStores(int page);
 }
