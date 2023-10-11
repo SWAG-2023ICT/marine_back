@@ -22,7 +22,7 @@ public class StoreServiceImpl implements StoreService {
         return storeMapper.getStoreById(storeId);
     }
     @Override
-    public List<Store> getAllStores() {
-        return storeMapper.getAllStores();
+    public List<Store> getAllStores(int page) {
+        return storeMapper.getAllStores(page);
     }
 }

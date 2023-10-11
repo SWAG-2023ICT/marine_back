@@ -15,8 +15,8 @@ import java.util.List;
 public class StoreController {
     private final StoreService storeService;
     @GetMapping("")
-    public ResponseEntity<List<Store>> getAllStores(){
-        return ResponseEntity.status(HttpStatus.OK).body(storeService.getAllStores());
+    public ResponseEntity<List<Store>> getAllStores(@RequestParam int page){
+        return ResponseEntity.status(HttpStatus.OK).body(storeService.getAllStores(page));
     }
     @GetMapping("/{storeId}")
     public ResponseEntity<?> findStoreById(@PathVariable String storeId){
