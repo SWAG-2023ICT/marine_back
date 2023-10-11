@@ -19,12 +19,12 @@ public class DestinationServiceImpl implements DestinationService {
 
     @Override
     public Integer addDestination(Destination destination) {
-        if(destination.getDestinationAddress() == null){
+        if(destination.getDestinationName() == null){
             int num = 0;
             if(!selectByUserId(destination.getUserId()).isEmpty()){
                 num = selectByUserId(destination.getUserId()).size();
             }
-            destination.setDestinationAddress("배송지-" + num);
+            destination.setDestinationName("배송지-" + num);
         }
         if(destinationMapper.addDestination(destination) > 0){
             return 1;
