@@ -32,10 +32,9 @@ public class DestinationController {
     public ResponseEntity addDestination(@RequestBody Destination destination)  {
        if(destinationService.addDestination(destination) == 1){
            return ResponseEntity.status(HttpStatus.CREATED).build();
-       }else{
+       } else{
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
        }
-
     }
     @Operation(summary = "주소 수정",description = "사용자의 주소를 수정합니다.")
     @ApiResponses(value = {
@@ -60,7 +59,7 @@ public class DestinationController {
                     content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/deleteDestination")
-    public ResponseEntity deleteDestination(@RequestParam int destinationId)  {
+    public ResponseEntity deleteDestination(@RequestParam int destinationId) {
         if(destinationService.deleteDestination(destinationId) == 1){
             return ResponseEntity.status(HttpStatus.OK).build();
         }else{
