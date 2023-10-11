@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import javax.validation.constraints.Pattern;
+import java.util.Arrays;
 import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,4 +27,19 @@ public class Store extends User{
     private String sellerId;
     private List<Order> oreOrders;
     private List<Product> products;
+
+    @Override
+    public String toString() {
+        return  super.toString() +
+                "Store{" +
+                "storeId='" + storeId + '\'' +
+                ", storeName='" + storeName + '\'' +
+                ", storePhoneNumber='" + storePhoneNumber + '\'' +
+                ", storeAddress='" + storeAddress + '\'' +
+                ", storeImage=" + Arrays.toString(storeImage) +
+                ", sellerId='" + sellerId + '\'' +
+                ", oreOrders=" + oreOrders +
+                ", products=" + products +
+                '}';
+    }
 }

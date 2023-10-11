@@ -9,8 +9,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import swag.marine.model.Store;
 import swag.marine.service.StoreService;
@@ -18,6 +20,7 @@ import swag.marine.service.UserService;
 
 import java.util.List;
 
+@Slf4j
 @RequestMapping("/marine/stores")
 @RequiredArgsConstructor
 @RestController
@@ -52,9 +55,12 @@ public class StoreController {
             @ApiResponse(responseCode = "400",description = "가가 등록에 실패하였습니다.",
                 content = @Content(mediaType = "application/json"))
     })
+    @Transactional
     @PostMapping("")
     public ResponseEntity<?> addStore(@RequestBody Store store){
         boolean flag = userService.addUser(store);
+        log.info("[fuck] : {}",store);
+        log.info("flag : {}",flag);
         if(flag) flag = storeService.addStore(store);
 
         if(flag) return ResponseEntity.status(HttpStatus.OK).body("success!");

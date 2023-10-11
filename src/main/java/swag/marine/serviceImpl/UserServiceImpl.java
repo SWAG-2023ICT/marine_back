@@ -19,7 +19,6 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final DestinationMapper destinationMapper;
     private final PasswordEncoder passwordEncoder;
-    @Transactional
     @Override
     public boolean addUser(User user) {
         Integer result = 0;
@@ -31,7 +30,8 @@ public class UserServiceImpl implements UserService {
                     Destination destination = destinations.get(0);
                     destination.setUserId(user.getUserId());
                     result = destinationMapper.addDestination(destination);
-                    }catch (NullPointerException exception) {
+                    } catch (NullPointerException exception) {
+                    return true;
                 }
             }
         }
