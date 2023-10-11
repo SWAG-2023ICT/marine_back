@@ -25,6 +25,7 @@ public class DestinationServiceImpl implements DestinationService {
                 num = selectByUserId(destination.getUserId()).size();
             }
             destination.setDestinationName("배송지-" + num);
+
         }
         if(destinationMapper.addDestination(destination) > 0){
             return 1;

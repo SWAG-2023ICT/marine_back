@@ -35,8 +35,11 @@
         LEFT JOIN price pr ON p.product_id = pr.product_id
     </select>
 
-    <select id="getAllStores" resultType="List">
+    <select id="getAllStores" parameterType="int" resultType="Store">
         SELECT *
         FROM store
+        <if test="page != null">
+        LIMIT #{page}
+        </if>
     </select>
 </mapper>

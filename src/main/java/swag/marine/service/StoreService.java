@@ -1,6 +1,5 @@
 package swag.marine.service;
 
-import org.springframework.http.ResponseEntity;
 import swag.marine.model.Store;
 
 import java.util.List;
@@ -8,5 +7,5 @@ import java.util.List;
 public interface StoreService {
     boolean addStore(Store store);
     Store findStoreById(String storeId);
-    List<Store> getAllStores();
+    List<Store> getAllStores(int page);
 }
