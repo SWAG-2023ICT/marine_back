@@ -44,8 +44,6 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 .antMatchers(SWAGGER_URL).permitAll();
-
-
         return httpSecurity.build();
     }
 

@@ -17,8 +17,10 @@ public class DestinationServiceImpl implements DestinationService {
 
     @Override
     public Integer addDestination(Destination destination) {
-        if(destination.getDestinationAddress() == null){
-            destination.setDestinationAddress(destination.getUserId()+"_기본 배송지");
+        if(destination.getDestinationName() == null){
+            destination.setDestinationName(
+                    destination.getDestinationAddress().split(",")[0]
+            );
         }
         if(destinationMapper.addDestination(destination) > 0){
             return 1;
