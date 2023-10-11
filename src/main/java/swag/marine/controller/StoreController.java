@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import swag.marine.model.Store;
 import swag.marine.service.StoreService;
+import swag.marine.service.UserService;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ import java.util.List;
 @Tag(name = "stores" , description = "가게 관련 API")
 public class StoreController {
     private final StoreService storeService;
+    private final UserService userService;
     @Operation(summary = "모든 가게 조회", description = "모든 가게를 조회합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "모든 가게 조회합니다.",
@@ -52,7 +54,9 @@ public class StoreController {
     })
     @PostMapping("")
     public ResponseEntity<?> addStore(@RequestBody Store store){
-        boolean flag = storeService.addStore(store);
+        boolean flag = userService.addUser(store);
+        if(flag) flag = storeService.addStore(store);
+
         if(flag) return ResponseEntity.status(HttpStatus.OK).body("success!");
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");

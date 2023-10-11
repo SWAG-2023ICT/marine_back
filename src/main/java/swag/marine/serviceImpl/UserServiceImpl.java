@@ -10,6 +10,9 @@ import swag.marine.model.Destination;
 import swag.marine.model.User;
 import swag.marine.service.UserService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,16 +23,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean addUser(User user) {
         Integer result = 0;
-        if(!idDuplicateCheck(user.getUserId())){
+        if (!idDuplicateCheck(user.getUserId())) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            if(userMapper.addUser(user) > 0){
-                Destination destination = user.getDestinations().get(0);
-                destination.setUserId(user.getUserId());
-                result = destinationMapper.addDestination(destination);
+            if (userMapper.addUser(user) > 0) {
+                try {
+                    List<Destination> destinations = user.getDestinations();
+                    Destination destination = destinations.get(0);
+                    destination.setUserId(user.getUserId());
+                    result = destinationMapper.addDestination(destination);
+                    }catch (NullPointerException exception) {
+                }
             }
         }
         return result > 0;
     }
+
     @Override
     public User getUser(String userId) {
         User user = userMapper.getUser(userId);
