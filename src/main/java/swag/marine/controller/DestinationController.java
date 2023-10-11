@@ -37,7 +37,13 @@ public class DestinationController {
        }
 
     }
-
+    @Operation(summary = "주소 수정",description = "사용자의 주소를 수정합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "주소가 정상적으로 수정되었습니다.",
+                content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "400",description = "주소 수정에 실패했습니다.",
+                content = @Content(mediaType = "application/json"))
+    })
     @PostMapping("/updateDestination")
     public ResponseEntity updateDestination(@RequestBody Destination destination)  {
         if(destinationService.updateDestination(destination) == 1){
@@ -46,7 +52,13 @@ public class DestinationController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-
+    @Operation(summary = "주소 삭제",description = "사용자의 주소를 삭제합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "주소가 정상적으로 삭제되었습니다.",
+                    content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "400",description = "주소 삭제에 실패했습니다.",
+                    content = @Content(mediaType = "application/json"))
+    })
     @PostMapping("/deleteDestination")
     public ResponseEntity deleteDestination(@RequestParam int destinationId)  {
         if(destinationService.deleteDestination(destinationId) == 1){
