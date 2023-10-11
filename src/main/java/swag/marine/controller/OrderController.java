@@ -21,14 +21,33 @@ import java.util.List;
 @Tag(name = "orders",description = "주문 관련 API")
 public class OrderController {
     private final OrderService orderService;
+
+    @Operation(summary = "주문 상세 검색",description = "주문 기본키로 주문을 조회합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "주소를 정상적으로 조회하였습니다.",
+                content = @Content(mediaType = "application/json",
+                schema = @Schema(implementation = Order.class)))
+    })
     @GetMapping("/{orderId}")
     public ResponseEntity<Order> getOrderByOrderId(@PathVariable Integer orderId){
         return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrdersByOrderId(orderId));
     }
+    @Operation(summary = "주문 내역 검색(유저)",description = "유저 아이디로 주문 내역을 조회합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "주문 내역을 정상적으로 조회하였습니다.",
+                content = @Content(mediaType = "application/json",
+                schema = @Schema(implementation = Order.class)))
+    })
     @GetMapping("/users/{userId}")
     public ResponseEntity<List<Order>> getOrderByUserId(@PathVariable String userId){
         return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrdersByUserId(userId));
     }
+    @Operation(summary = "주문 내역 검색(가게)",description = "사업자 번호로 주문 내역을 조회합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "주문 내역을 정상적으로 조회하였습니다.",
+                content = @Content(mediaType = "application/json",
+                schema = @Schema(implementation = Order.class)))
+    })
     @GetMapping("/stores/{storeId}")
     public ResponseEntity<List<Order>> getOrderByStoreId(@PathVariable String storeId){
         return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrdersByStoreId(storeId));
