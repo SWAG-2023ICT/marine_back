@@ -66,8 +66,12 @@ public class UserController {
     })
     @PostMapping("/auth")
     public ResponseEntity<?> login(@RequestBody User user){
-        boolean flag = userService.passwordCheck(user);
-        if(flag) return ResponseEntity.status(HttpStatus.OK).body("success!");
+        boolean passwordCheck = userService.passwordCheck(user);
+        boolean isStore = userService.isStore(user.getUserId());
+        if (passwordCheck) {
+            if(isStore) return ResponseEntity.status(HttpStatus.OK).body(true);
+            else return ResponseEntity.status(HttpStatus.OK).body(false);
+        }
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
     }

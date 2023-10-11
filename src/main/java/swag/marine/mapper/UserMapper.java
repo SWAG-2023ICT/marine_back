@@ -9,4 +9,5 @@ public interface UserMapper {
     User getUser(String userId);
     Integer updateUser(User user);
     Integer idDuplicateCheck(String userId);
+    Integer isStore(String sellerId);
 }

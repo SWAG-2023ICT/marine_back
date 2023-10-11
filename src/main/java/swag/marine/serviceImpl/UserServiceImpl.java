@@ -55,4 +55,10 @@ public class UserServiceImpl implements UserService {
     public boolean idDuplicateCheck(String userId) {
         return userMapper.idDuplicateCheck(userId) > 0;
     }
+    @Override
+    public boolean isStore(String sellerId) {
+        return userMapper.isStore(sellerId) > 0;
+    }
+
+
 }
