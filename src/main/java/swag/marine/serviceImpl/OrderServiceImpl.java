@@ -80,11 +80,20 @@ public class OrderServiceImpl implements OrderService {
         }
         return result > 0;
     }
-
     @Override
     public boolean addCanceledOrder(Order order) {
         order.setReason("공급 문제로 배송을 취소합니다.");
         Integer result = orderMapper.addCanceledOrders(order);
+        return result > 0;
+    }
+
+    @Override
+    public boolean updateOrder(Order order) {
+        Integer result = orderMapper.updateOrder(order);
+        if(result > 0){
+            order.setDeliveryStatus(3);
+            result = orderMapper.updateDeliveryStatus(order);
+        }
         return result > 0;
     }
 }

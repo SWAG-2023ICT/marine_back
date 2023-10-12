@@ -90,4 +90,10 @@
         SET delivery_status = #{deliveryStatus}
         WHERE orders_id = #{ordersId}
     </update>
+
+    <update id="updateOrder" parameterType="Order">
+        UPDATE orders
+        SET delivery_invoice = #{deliveryInvoice}
+        WHERE orders_id = #{ordersId}
+    </update>
 </mapper>

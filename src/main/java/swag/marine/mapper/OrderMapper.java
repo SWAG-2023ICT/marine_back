@@ -16,4 +16,5 @@ public interface OrderMapper {
     Integer updateOrderStatus(Order order);
     Integer addCanceledOrders(Order order);
     Integer updateDeliveryStatus(Order order);
+    Integer updateOrder(Order order);
 }
