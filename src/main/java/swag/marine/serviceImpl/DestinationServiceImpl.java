@@ -51,11 +51,17 @@ public class DestinationServiceImpl implements DestinationService {
         return destinationMapper.selectByUserId(userId);
     }
 
-    @Transactional
     @Override
     public boolean updateDefaultStatus(List<Destination> destinations) {
-        Integer result = destinationMapper.updateDefaultStatus(destinations);
-
+        Integer result = 0;
+        for(int i = 0; i < destinations.size(); i++){
+            Destination destination = destinations.get(i);
+            if(i == 0) destination.setDefaultStatus(false);
+            else destination.setDefaultStatus(true);
+            result = destinationMapper.updateDefaultStatus(destination);
+            if(result <= 0) return false;
+        }
+        
         return result > 0;
     }
 }
