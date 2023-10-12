@@ -9,8 +9,7 @@ import java.util.List;
 public interface DestinationMapper {
     Integer addDestination(Destination destination);
     Integer updateDestination(Destination destination);
-
     Integer deleteDestination(int destinationId);
-
     List<Destination> selectByUserId(String userId);
+    Integer getDestinationCount(String userId);
 }

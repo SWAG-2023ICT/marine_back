@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 @Schema(description = "주문 Model")
 public class Order {
     @Schema(description = "주문 기본키", example = "1")

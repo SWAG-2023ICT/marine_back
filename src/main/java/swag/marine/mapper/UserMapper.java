@@ -10,4 +10,5 @@ public interface UserMapper {
     Integer updateUser(User user);
     Integer idDuplicateCheck(String userId);
     Integer isStore(String sellerId);
+    Integer updatePassword(User user);
 }

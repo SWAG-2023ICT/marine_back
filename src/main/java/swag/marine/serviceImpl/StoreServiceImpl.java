@@ -2,7 +2,6 @@ package swag.marine.serviceImpl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import swag.marine.mapper.StoreMapper;
 import swag.marine.model.Store;
 import swag.marine.service.StoreService;
@@ -13,7 +12,6 @@ import java.util.List;
 @Service
 public class StoreServiceImpl implements StoreService {
     private final StoreMapper storeMapper;
-    @Transactional
     @Override
     public boolean addStore(Store store) {
         store.setSellerId(store.getUserId());

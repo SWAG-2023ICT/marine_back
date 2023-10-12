@@ -4,11 +4,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import javax.validation.constraints.Pattern;
+import java.util.Arrays;
 import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 @Schema(description = "가게 Model")
 public class Store extends User{
     @Schema(description = "사업자 번호", example = "111-22-33333")
@@ -26,4 +28,5 @@ public class Store extends User{
     private String sellerId;
     private List<Order> oreOrders;
     private List<Product> products;
+
 }

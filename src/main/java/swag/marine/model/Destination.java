@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 @Schema(description = "주소 Model")
 public class Destination {
     @Schema(description = "주소 기본키", example = "1")

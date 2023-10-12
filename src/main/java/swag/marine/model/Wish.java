@@ -8,8 +8,8 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class OrderDetail {
-    int ordersId;
-    int productId;
-    int amount;
+public class Wish {
+    int wishId;
+    String storeId;
+    String userId;
 }
