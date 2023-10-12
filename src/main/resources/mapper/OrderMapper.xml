@@ -77,12 +77,12 @@
     <update id="updateOrderStatus" parameterType="Order">
         UPDATE orders
         SET order_status = #{orderStatus}
-        WHERE orders_id = #{orderId}
+        WHERE orders_id = #{ordersId}
     </update>
 
     <insert id="addCanceledOrders" parameterType="Order">
         INSERT INTO canceled_orders
-        value (#{orderId},#{reason},#{canceledDtm})
+        value (#{ordersId},#{reason},now())
     </insert>
 
     <update id="updateDeliveryStatus" parameterType="Order">

@@ -72,11 +72,8 @@ public class OrderController {
     @PostMapping("/cancel")
     public ResponseEntity<?> updateOrderStatus(@RequestBody Order order){
         boolean flag = orderService.updateOrderStatus(order);
-        if(flag){
-            flag = orderService.addCanceledOrder(order);
-        }
 
-        if(flag) ResponseEntity.status(HttpStatus.OK).body("success!");
+        if(flag) return ResponseEntity.status(HttpStatus.OK).body("success!");
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
     }
