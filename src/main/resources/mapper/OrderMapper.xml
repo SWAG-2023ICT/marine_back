@@ -3,7 +3,7 @@
 
 <mapper namespace="swag.marine.mapper.OrderMapper">
     <resultMap id="defaultOrder" type="Order">
-        <id property="orderId" column="orders_id"/>
+        <id property="ordersId" column="orders_id"/>
         <result property="orderDtm" column="order_dtm"/>
         <result property="totalPrice" column="total_price"/>
         <result property="deliveryPhoneNumber" column="delivery_phone_number"/>
@@ -18,6 +18,7 @@
             <id property="productId" column="product_id"/>
             <result property="origin" column="origin"/>
             <result property="productName" column="product_name"/>
+            <result property="cultivationType" column="cultivation_type"/>
             <result property="productImage" column="product_image"/>
             <result property="description" column="description"/>
             <result property="productStatus" column="product_status"/>
@@ -28,6 +29,13 @@
             </collection>
         </collection>
     </resultMap>
+
+
+    <select id="getDestinationById" parameterType="int" resultType="Destination">
+        SELECT *
+        FROM destination
+        WHERE destination_id =#{destinationId}
+    </select>
 
     <sql id="selectOrders">
         SELECT o.*,od.amount,p.*,pr.*

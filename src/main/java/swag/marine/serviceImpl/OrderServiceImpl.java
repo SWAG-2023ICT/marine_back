@@ -3,6 +3,7 @@ package swag.marine.serviceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import swag.marine.mapper.DestinationMapper;
 import swag.marine.mapper.OrderMapper;
 import swag.marine.mapper.PriceMapper;
 import swag.marine.model.Order;
@@ -19,6 +20,7 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
     private final PriceMapper priceMapper;
+    private final DestinationMapper destinationMapper;
     @Override
     public Order getOrdersByOrderId(int orderId) {
         return orderMapper.getOrdersByOrderId(orderId);
@@ -29,7 +31,11 @@ public class OrderServiceImpl implements OrderService {
     }
     @Override
     public List<Order> getOrdersByStoreId(String storeId) {
-        return orderMapper.getOrdersByStoreId(storeId);
+        List<Order> orders = orderMapper.getOrdersByStoreId(storeId);
+        for(Order order : orders){
+            order.setDestination(destinationMapper.getDestinationById(order.getDestinationId()));
+        }
+        return orders;
     }
 
     @Transactional

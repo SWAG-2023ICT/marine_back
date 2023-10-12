@@ -162,7 +162,8 @@ public class UserController {
     @GetMapping("/wish/check")
     public ResponseEntity<?> checkWishStatus(@RequestParam String storeId,String userId){
         Integer wishId = userService.checkWishStatus(storeId,userId);
-
+        if(wishId == null) return ResponseEntity.status(HttpStatus.OK).body(0);
         return ResponseEntity.status(HttpStatus.OK).body(wishId);
+
     }
 }
