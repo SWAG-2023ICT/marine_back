@@ -36,5 +36,7 @@ public class Order {
     private String storeId;
     @Schema(description = "주소 기본키", example = "1")
     private Integer destinationId;
+    private String reason;
+    private Date canceledDtm;
     private List<Product> products;
 }

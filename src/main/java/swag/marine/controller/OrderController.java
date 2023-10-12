@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import swag.marine.model.Order;
 import swag.marine.service.OrderService;
@@ -64,6 +65,18 @@ public class OrderController {
     public ResponseEntity<?> addOrders(@RequestBody Order order){
         boolean flag = orderService.addOrders(order);
         if(flag) return ResponseEntity.status(HttpStatus.CREATED).body("success!");
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
+    }
+    @Transactional
+    @PostMapping("/cancel")
+    public ResponseEntity<?> updateOrderStatus(@RequestBody Order order){
+        boolean flag = orderService.updateOrderStatus(order);
+        if(flag){
+            flag = orderService.addCanceledOrder(order);
+        }
+
+        if(flag) ResponseEntity.status(HttpStatus.OK).body("success!");
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
     }

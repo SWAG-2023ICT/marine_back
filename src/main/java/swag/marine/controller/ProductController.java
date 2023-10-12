@@ -35,22 +35,22 @@ public class ProductController {
                 content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/addProduct")
-    public ResponseEntity addProduct(@RequestBody Product product, @RequestBody List<Price> prices)  {
-        int result = 0;
+    public ResponseEntity addProduct(@RequestBody Product product)  {
+        List<Price> prices = product.getPrices();
+        int result1 = productService.addProduct(product);
+        int result2 = 0;
         for(Price price : prices){
             price.setProductId(product.getProductId());
-                if(priceService.addPrice(price) == 1){
-                    result = 1;
-                }
+            if(priceService.addPrice(price) == 1){
+                result2 = 1;
             }
-        if(productService.addProduct(product) == 1 && result  == 1){
+        }
+        if(result1 == 1 && result2 == 1){
             return ResponseEntity.status(HttpStatus.CREATED).build();
         }else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-
     }
-
     @Operation(summary = "상품 수정",description = "상품 내용을 수정합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "상품이 정상적으로 수정되었습니다.",
@@ -59,7 +59,8 @@ public class ProductController {
                 content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/updateProduct")
-    public ResponseEntity updateProduct(@RequestBody Product product, @RequestBody List<Price> prices)  {
+    public ResponseEntity updateProduct(@RequestBody Product product)  {
+        List<Price> prices = product.getPrices();
         int result = 0;
         for(Price price : prices){
             if(priceService.updatePrice(price)== 1){
@@ -81,11 +82,14 @@ public class ProductController {
     })
     @PostMapping("/deleteProduct")
     public ResponseEntity deleteProduct(@RequestParam int productId, @RequestParam int priceId)  {
-        if(productService.deleteProduct(productId) == 1 && priceService.deletePrice(priceId) == 1){
-            return ResponseEntity.status(HttpStatus.OK).build();
-        }else{
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        boolean flag = priceService.deletePrice(priceId) == 1;
+        if(flag) {
+            flag = productService.deleteProduct(productId) == 1;
         }
+
+        if(flag) return ResponseEntity.status(HttpStatus.OK).build();
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
     @Operation(summary = "모든 가격 검색",description = "상품 기본키로 가격을 조회합니다.")
     @ApiResponses(value = {
