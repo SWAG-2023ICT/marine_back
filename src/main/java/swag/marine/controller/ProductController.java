@@ -83,8 +83,7 @@ public class ProductController {
     })
     @PostMapping("/deleteProduct")
     public ResponseEntity deleteProduct(@RequestBody Product product)  {
-
-        boolean flag = priceService.deletePrice(product.getPrices()) == product.getPrices().size();
+        boolean flag = priceService.deletePrice(product.getPrices()) == 1;
         if(flag) {
             flag = productService.deleteProduct(product.getProductId()) == 1;
         }
@@ -119,8 +118,8 @@ public class ProductController {
     }
     @PutMapping("/updateProductStatus")
     public ResponseEntity updateProductStatus(@RequestBody Product product){
-        boolean flag = productService.updateProductStatus(product);
-        if(flag) ResponseEntity.status(HttpStatus.OK).build();
+       boolean flag = productService.updateProductStatus(product) == 1;
+        if(flag) return ResponseEntity.status(HttpStatus.OK).build();
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
