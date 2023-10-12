@@ -14,8 +14,12 @@
         WHERE price_id = #{priceId}
     </update>
 
-    <delete id="deletePrice" parameterType="int">
-        DELETE FROM price WHERE price_id = #{priceId}
+    <delete id="deletePrice" parameterType="List">
+        DELETE FROM price
+        WHERE
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            price_id = #{item.priceId}
+        </foreach>
     </delete>
 
     <select id="selectAllPriceByProductId" parameterType="int">
@@ -24,5 +28,10 @@
 
     <delete id="deleteAllPriceByProductId" parameterType="int">
         DELETE FROM price WHERE product_id = #{productId}
+    </delete>
+
+    <delete id="deletePriceByPriceId" parameterType="int">
+        DELETE FROM price
+        WHERE price_id = #{priceId}
     </delete>
 </mapper>

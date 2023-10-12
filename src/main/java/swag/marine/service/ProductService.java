@@ -8,4 +8,5 @@ public interface ProductService {
     Integer addProduct(Product product);
     Integer updateProduct(Product product);
     Integer deleteProduct(int productId);
+    boolean updateProductStatus(Product product);
 }

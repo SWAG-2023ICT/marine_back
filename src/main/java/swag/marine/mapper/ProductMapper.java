@@ -8,5 +8,5 @@ public interface ProductMapper {
     Integer addProduct(Product product);
     Integer updateProduct(Product product);
     Integer deleteProduct(int product_id);
-
+    Integer updateProductStatus(Product product);
 }

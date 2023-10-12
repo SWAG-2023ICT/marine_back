@@ -9,8 +9,8 @@ import java.util.List;
 public interface PriceMapper {
     Integer addPrice(Price price);
     Integer updatePrice(Price price);
-    Integer deletePrice(int priceId);
+    Integer deletePrice(List<Price> prices);
     List<Price> selectAllPriceByProductId(int productId);
     Integer deleteAllPriceByProductId(int productId);
-
+    Integer deletePriceByPriceId(int priceId);
 }

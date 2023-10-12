@@ -1,10 +1,12 @@
 package swag.marine.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,7 +20,7 @@ public class Product {
     @Schema(description = "원산지", example = "제주산")
     private String origin;
     @Schema(description = "자연산 여부", example = "true")
-    private boolean cultivationType;
+    private Integer cultivationType;
     @Schema(description = "상품 이름", example = "갈치")
     private String productName;
     @Schema(description = "상품 이미지",nullable = true)

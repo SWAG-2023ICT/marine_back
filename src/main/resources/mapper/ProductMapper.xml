@@ -22,4 +22,9 @@
         DELETE FROM product WHERE product_id = #{productId}
     </delete>
 
+    <update id="updateProductStatus" parameterType="Product">
+        UPDATE product
+        SET product_status = #{productStatus}
+        WHERE product_id = #{productId}
+    </update>
 </mapper>

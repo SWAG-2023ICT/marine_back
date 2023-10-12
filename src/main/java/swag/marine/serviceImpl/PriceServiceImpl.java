@@ -34,12 +34,17 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public Integer deletePrice(int priceId) {
-        if(priceMapper.deletePrice(priceId) > 0){
+    public Integer deletePrice(List<Price> prices) {
+        if(priceMapper.deletePrice(prices) == prices.size()){
             return 1;
         }else{
             return 0;
         }
+    }
+
+    @Override
+    public Integer deletePriceByPriceId(int priceId) {
+        return priceMapper.deletePriceByPriceId(priceId);
     }
 
     @Override

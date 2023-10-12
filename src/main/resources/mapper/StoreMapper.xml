@@ -12,6 +12,7 @@
         <collection property="products" ofType="Product">
             <id property="productId" column="product_id"/>
             <result property="origin" column="origin"/>
+            <result property="cultivationType" column="cultivation_type"/>
             <result property="productName" column="product_name"/>
             <result property="productImage" column="product_image"/>
             <result property="description" column="description"/>
