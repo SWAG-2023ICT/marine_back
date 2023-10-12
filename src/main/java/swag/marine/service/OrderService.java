@@ -11,4 +11,5 @@ public interface OrderService {
     boolean addOrders(Order order);
     boolean updateOrderStatus(Order order);
     boolean addCanceledOrder(Order order);
+    boolean updateOrder(Order order);
 }

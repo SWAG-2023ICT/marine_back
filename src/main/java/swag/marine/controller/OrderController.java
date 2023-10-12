@@ -77,4 +77,12 @@ public class OrderController {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
     }
+
+    @PostMapping("/updateOrder")
+    public ResponseEntity<?> updateOrder(@RequestBody Order order){
+        boolean flag = orderService.updateOrder(order);
+        if(flag) return ResponseEntity.status(HttpStatus.OK).build();
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
 }
