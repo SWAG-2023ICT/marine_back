@@ -108,6 +108,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Store> findAllWish(String userId){
         List<String> storeIds = wishMapper.findAllWish(userId);
+        if(storeIds.size() == 0) return new ArrayList<>();
         return storeMapper.getStoreByWishStore(storeIds);
     }
 }
