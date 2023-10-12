@@ -38,6 +38,7 @@
 
     <select id="getStoreById" parameterType="string" resultMap="defaultStore">
         <include refid="allStoreData"/>
+        WHERE s.store_id = #{storeId}
     </select>
 
     <select id="getAllStores" parameterType="int" resultType="Store">

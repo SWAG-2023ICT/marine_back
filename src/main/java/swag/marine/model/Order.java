@@ -37,9 +37,9 @@ public class Order {
     private String orderUserId;
     @Schema(description = "사업자 번호", example = "111-22-33333")
     private String storeId;
-    @Schema(description = "주소 기본키", example = "1")
-    private Integer destinationId;
     private String reason;
     private Date canceledDtm;
+    private Destination destination;
+    private Integer destinationId;
     private List<Product> products;
 }

@@ -33,4 +33,10 @@
         WHERE destination_id = #{destinationId}
     </update>
 
+    <select id="getDestinationById" parameterType="int" resultType="Destination">
+        SELECT *
+        FROM destination
+        WHERE destination_id = #{destiNationId}
+    </select>
+
 </mapper>
