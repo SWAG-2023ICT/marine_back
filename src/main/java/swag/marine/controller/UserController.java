@@ -98,11 +98,11 @@ public class UserController {
                 List<Store> stores = storeService.findStoreByUserId(user.getUserId());
                 response.put("userType","store");
                 response.put("data",stores.get(0));
-                return ResponseEntity.status(HttpStatus.OK).body(JSONObject.toJSONString(response));
+                return ResponseEntity.status(HttpStatus.OK).body(response);
             } else {
                 response.put("userType","user");
                 response.put("data",userService.getUser(user.getUserId()));
-                return ResponseEntity.status(HttpStatus.OK).body(JSONObject.toJSONString(response));
+                return ResponseEntity.status(HttpStatus.OK).body(response);
             }
         }
 
