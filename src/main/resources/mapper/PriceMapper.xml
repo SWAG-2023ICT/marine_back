@@ -16,10 +16,11 @@
 
     <delete id="deletePrice" parameterType="List">
         DELETE FROM price
-        WHERE
-        <foreach collection="list" item="item" separator="," open="(" close=")">
-            price_id = #{item.priceId}
+        WHERE price_id IN (
+        <foreach collection="list" item="item" separator="," open="">
+         #{item.priceId}
         </foreach>
+        )
     </delete>
 
     <select id="selectAllPriceByProductId" parameterType="int">
