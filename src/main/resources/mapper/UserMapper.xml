@@ -37,7 +37,7 @@
         UPDATE user
         SET
             <if test="name != null">
-                name = #{name},
+                name = #{name}
             </if>
             <if test="phoneNumber != null">
                 phone_number = #{phoneNumber}

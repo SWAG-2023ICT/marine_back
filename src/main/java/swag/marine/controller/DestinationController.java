@@ -58,12 +58,20 @@ public class DestinationController {
                     content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/deleteDestination")
-    public ResponseEntity deleteDestination(@RequestParam int destinationId){
-        if(destinationService.deleteDestination(destinationId) == 1){
+    public ResponseEntity deleteDestination(@RequestBody Destination destination){
+        if(destinationService.deleteDestination(destination.getDestinationId()) == 1){
             return ResponseEntity.status(HttpStatus.OK).build();
         }else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
+    }
+
+    @PostMapping("/updateDefaultStatus")
+    public ResponseEntity updateDefaultStatus(@RequestBody boolean defaultStatus){
+        boolean flag = destinationService.updateDefaultStatus(defaultStatus);
+        if(flag) return ResponseEntity.status(HttpStatus.OK).build();
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
 }
