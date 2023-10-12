@@ -3,7 +3,7 @@
 
 <mapper namespace="swag.marine.mapper.WishMapper">
 
-    <insert id="addWish" parameterType="Wish">
+    <insert id="addWish" parameterType="Wish" useGeneratedKeys="true" keyProperty="wishId">
         INSERT INTO wish (store_id, user_id)
         VALUES ( #{storeId},#{userId} )
     </insert>
