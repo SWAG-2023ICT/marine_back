@@ -52,8 +52,8 @@ public class DestinationServiceImpl implements DestinationService {
     }
 
     @Override
-    public boolean updateDefaultStatus(boolean defaultStatus) {
-        Integer result = destinationMapper.updateDefaultStatus(defaultStatus);
+    public boolean updateDefaultStatus(int destinationId) {
+        Integer result = destinationMapper.updateDefaultStatus(destinationId);
         return result > 0;
     }
 }

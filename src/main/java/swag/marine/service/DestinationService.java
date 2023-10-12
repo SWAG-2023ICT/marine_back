@@ -12,6 +12,6 @@ public interface DestinationService {
 
     Integer deleteDestination(int destinationId);
     List<Destination> selectByUserId(String userId);
-    boolean updateDefaultStatus(boolean defaultStatus);
+    boolean updateDefaultStatus(int destinationId);
 }
 
