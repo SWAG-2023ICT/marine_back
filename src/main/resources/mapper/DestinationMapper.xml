@@ -26,4 +26,10 @@
         FROM destination
         WHERE user_id = #{userId}
     </select>
+
+    <update id="updateDefaultStatus" parameterType="int">
+        UPDATE destination
+        SET default_status = 1
+        WHERE destination_id = #{destinationId}
+    </update>
 </mapper>
