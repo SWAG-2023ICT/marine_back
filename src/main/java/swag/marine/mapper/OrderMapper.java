@@ -13,4 +13,6 @@ public interface OrderMapper {
     List<Order> getOrdersByUserId(String userId);
     Integer addOrder(Order order);
     Integer addOrderDetail(List<OrderDetail> orderDetails);
+    Integer updateOrderStatus(Order order);
+    Integer addCanceledOrders(Order order);
 }

@@ -51,4 +51,16 @@ public class OrderServiceImpl implements OrderService {
         }
         return result == order.getProducts().size();
     }
+
+    @Override
+    public boolean updateOrderStatus(Order order) {
+        Integer result = orderMapper.updateOrderStatus(order);
+        return result > 0;
+    }
+
+    @Override
+    public boolean addCanceledOrder(Order order) {
+        Integer result = orderMapper.addCanceledOrders(order);
+        return result > 0;
+    }
 }

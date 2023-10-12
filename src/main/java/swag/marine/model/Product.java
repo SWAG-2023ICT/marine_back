@@ -17,6 +17,8 @@ public class Product {
     private int productId;
     @Schema(description = "원산지", example = "제주산")
     private String origin;
+    @Schema(description = "자연산 여부", example = "true")
+    private boolean cultivationType;
     @Schema(description = "상품 이름", example = "갈치")
     private String productName;
     @Schema(description = "상품 이미지",nullable = true)

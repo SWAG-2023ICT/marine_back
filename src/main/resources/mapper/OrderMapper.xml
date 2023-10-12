@@ -65,4 +65,15 @@
         <include refid="selectOrders"/>
         WHERE o.store_id = #{id}
     </select>
+
+    <update id="updateOrderStatus" parameterType="Order">
+        UPDATE orders
+        SET order_status = #{orderStatus}
+        WHERE orders_id = #{orderId}
+    </update>
+
+    <insert id="addCanceledOrders" parameterType="Order">
+        INSERT INTO canceled_orders
+        value (#{orderId},#{reason},#{canceledDtm})
+    </insert>
 </mapper>

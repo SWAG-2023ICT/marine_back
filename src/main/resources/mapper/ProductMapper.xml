@@ -3,9 +3,9 @@
 
 <mapper namespace="swag.marine.mapper.ProductMapper">
 
-    <insert id="addProduct" parameterType="Product">
-        INSERT INTO product (origin, product_name, product_image, description, product_status, store_id)
-        VALUE (#{origin}, #{productName}, #{productImage}, #{description}, #{productStatus}, #{storeId})
+    <insert id="addProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="productId">
+        INSERT INTO product (origin,cultivation_type, product_name, product_image, description, product_status, store_id)
+        VALUE (#{origin}, #{cultivationType},#{productName}, #{productImage}, #{description}, #{productStatus}, #{storeId})
     </insert>
 
     <update id="updateProduct" parameterType="Product">

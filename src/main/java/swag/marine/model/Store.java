@@ -25,7 +25,7 @@ public class Store extends User{
     private byte[] storeImage;
     @Schema(description = "사장님 아이디", example = "example123")
     private String sellerId;
-    private List<Order> oreOrders;
+    private List<Order> orders;
     private List<Product> products;
 
 }
