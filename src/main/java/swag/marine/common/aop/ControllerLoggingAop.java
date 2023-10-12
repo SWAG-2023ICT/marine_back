@@ -20,13 +20,13 @@ public class ControllerLoggingAop {
         Method method = getMethod(joinPoint);
         log.info("[Method Name] : {}",method.getName());
 
-        Object[] args = joinPoint.getArgs();
-        if(args.length == 0) log.info("[Parameter] : null");
-
-        for(Object arg : args){
-            log.info("[Parameter Type] : {}",arg.getClass().getSimpleName());
-            log.info("[Parameter Value] : {}", arg);
-        }
+//        Object[] args = joinPoint.getArgs();
+//        if(args.length == 0) log.info("[Parameter] : null");
+//
+//        for(Object arg : args){
+//            log.info("[Parameter Type] : {}",arg.getClass().getSimpleName());
+//            log.info("[Parameter Value] : {}", arg);
+//        }
     }
 
     @AfterReturning(value = "onRequest()", returning = "returnObj")

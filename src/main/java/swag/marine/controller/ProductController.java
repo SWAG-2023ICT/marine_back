@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,7 +19,7 @@ import swag.marine.service.PriceService;
 import swag.marine.service.ProductService;
 
 import java.util.List;
-
+@Slf4j
 @RequestMapping(value = "/marine/product",produces = "application/json;charset=UTF-8")
 @RestController
 @Tag(name ="product",description = "상품 관련 API")
@@ -81,10 +82,11 @@ public class ProductController {
                 content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/deleteProduct")
-    public ResponseEntity deleteProduct(@RequestParam int productId, @RequestParam int priceId)  {
-        boolean flag = priceService.deletePrice(priceId) == 1;
+    public ResponseEntity deleteProduct(@RequestBody Product product)  {
+
+        boolean flag = priceService.deletePrice(product.getPrices()) == product.getPrices().size();
         if(flag) {
-            flag = productService.deleteProduct(productId) == 1;
+            flag = productService.deleteProduct(product.getProductId()) == 1;
         }
 
         if(flag) return ResponseEntity.status(HttpStatus.OK).build();
@@ -109,10 +111,17 @@ public class ProductController {
     @PostMapping("/deleteAllPriceByProductId")
     public ResponseEntity deleteAllPriceByProductId(@RequestParam int productId)  {
 
-        if(priceService.deletePrice(productId) == 1){
+        if(priceService.deletePriceByPriceId(productId) == 1){
             return ResponseEntity.status(HttpStatus.OK).build();
         }else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
+    }
+    @PutMapping("/updateProductStatus")
+    public ResponseEntity updateProductStatus(@RequestBody Product product){
+        boolean flag = productService.updateProductStatus(product);
+        if(flag) ResponseEntity.status(HttpStatus.OK).build();
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }

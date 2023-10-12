@@ -1,6 +1,7 @@
 package swag.marine.serviceImpl;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,6 +9,7 @@ import swag.marine.mapper.ProductMapper;
 import swag.marine.model.Product;
 import swag.marine.service.ProductService;
 
+@Slf4j
 @Transactional
 @Service("ProductService")
 public class ProductServiceImpl  implements ProductService {
@@ -36,5 +38,10 @@ public class ProductServiceImpl  implements ProductService {
         }else{
             return 0;
         }
+    }
+    @Override
+    public boolean updateProductStatus(Product product) {
+        Integer result = productMapper.updateProductStatus(product);
+        return result > 0;
     }
 }
