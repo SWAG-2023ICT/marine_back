@@ -84,4 +84,10 @@
         INSERT INTO canceled_orders
         value (#{orderId},#{reason},#{canceledDtm})
     </insert>
+
+    <update id="updateDeliveryStatus" parameterType="Order">
+        UPDATE orders
+        SET delivery_status = #{deliveryStatus}
+        WHERE orders_id = #{ordersId}
+    </update>
 </mapper>
