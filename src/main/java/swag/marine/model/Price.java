@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 @Schema(description = "가격 Model")
 public class Price {
     @Schema(description = "가격 기본키", example = "1")

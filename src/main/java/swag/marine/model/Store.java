@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 @Schema(description = "가게 Model")
 public class Store extends User{
     @Schema(description = "사업자 번호", example = "111-22-33333")
@@ -28,18 +29,4 @@ public class Store extends User{
     private List<Order> oreOrders;
     private List<Product> products;
 
-    @Override
-    public String toString() {
-        return  super.toString() +
-                "Store{" +
-                "storeId='" + storeId + '\'' +
-                ", storeName='" + storeName + '\'' +
-                ", storePhoneNumber='" + storePhoneNumber + '\'' +
-                ", storeAddress='" + storeAddress + '\'' +
-                ", storeImage=" + Arrays.toString(storeImage) +
-                ", sellerId='" + sellerId + '\'' +
-                ", oreOrders=" + oreOrders +
-                ", products=" + products +
-                '}';
-    }
 }

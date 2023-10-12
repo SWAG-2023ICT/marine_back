@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 @Schema(description = "상품 Model")
 public class Product {
     @Schema(description = "상품 기본키", example = "1")
