@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import swag.marine.model.Store;
 import swag.marine.model.User;
 import swag.marine.model.Wish;
+import swag.marine.service.StoreService;
 import swag.marine.service.UserService;
 
 import java.util.List;
@@ -26,6 +27,7 @@ import java.util.List;
 @Tag(name = "users", description = "유저 관련 API")
 public class UserController {
     private final UserService userService;
+    private final StoreService storeService;
     @Operation(summary = "유저 추가", description = "회원가입 절차를 통해 유저를 추가합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "유저를 정상적으로 등록했습니다.",
@@ -87,8 +89,11 @@ public class UserController {
         boolean passwordCheck = userService.passwordCheck(user);
         boolean isStore = userService.isStore(user.getUserId());
         if (passwordCheck) {
-            if(isStore) return ResponseEntity.status(HttpStatus.OK).body(true);
-            else return ResponseEntity.status(HttpStatus.OK).body(false);
+            if(isStore){
+                List<Store> stores = storeService.findStoreByUserId(user.getUserId());
+                return ResponseEntity.status(HttpStatus.OK).body(stores.get(0));
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(false);
         }
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
@@ -144,7 +149,6 @@ public class UserController {
         List<Store> stores = userService.findAllWish(userId);
         return ResponseEntity.status(HttpStatus.OK).body(stores);
     }
-
     @GetMapping("/wish/check")
     public ResponseEntity<?> checkWishStatus(@RequestParam String storeId,String userId){
         Integer wishId = userService.checkWishStatus(storeId,userId);
