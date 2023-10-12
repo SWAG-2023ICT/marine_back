@@ -21,7 +21,7 @@ import swag.marine.service.UserService;
 import java.util.List;
 
 @Slf4j
-@RequestMapping("/marine/stores")
+@RequestMapping(value = "/marine/stores",produces = "application/json;charset=UTF-8")
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "stores" , description = "가게 관련 API")

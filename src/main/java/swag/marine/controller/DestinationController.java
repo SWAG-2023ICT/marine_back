@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import swag.marine.model.Destination;
 import swag.marine.service.DestinationService;
 
-@RequestMapping("/marine/destination")
+@RequestMapping(value = "/marine/destination",produces = "application/json;charset=UTF-8")
 @RestController
 @Tag(name = "destination",description = "주소 관련 API")
 public class DestinationController {

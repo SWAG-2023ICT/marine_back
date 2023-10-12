@@ -19,7 +19,7 @@ import swag.marine.service.ProductService;
 
 import java.util.List;
 
-@RequestMapping("/marine/product")
+@RequestMapping(value = "/marine/product",produces = "application/json;charset=UTF-8")
 @RestController
 @Tag(name ="product",description = "상품 관련 API")
 public class ProductController {
