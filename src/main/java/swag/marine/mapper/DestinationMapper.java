@@ -12,5 +12,5 @@ public interface DestinationMapper {
     Integer deleteDestination(int destinationId);
     List<Destination> selectByUserId(String userId);
     Integer getDestinationCount(String userId);
-    Integer updateDefaultStatus(int destinationId);
+    Integer updateDefaultStatus(List<Destination> destinations);
 }

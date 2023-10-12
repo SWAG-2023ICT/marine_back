@@ -35,7 +35,7 @@ public class StoreController {
                 array = @ArraySchema(schema = @Schema(implementation = Store.class))))
     })
     @GetMapping("")
-    public ResponseEntity<List<Store>> getAllStores(@RequestParam(required = false) int page){
+    public ResponseEntity<List<Store>> getAllStores(@RequestParam(required = false) Integer page){
         return ResponseEntity.status(HttpStatus.OK).body(storeService.getAllStores(page));
     }
     @Operation(summary = "가게 조회",description = "사업자 번호를 통해 특정가게를 조회합니다.")

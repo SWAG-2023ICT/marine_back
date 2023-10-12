@@ -7,5 +7,5 @@ import java.util.List;
 public interface StoreService {
     boolean addStore(Store store);
     Store findStoreById(String storeId);
-    List<Store> getAllStores(int page);
+    List<Store> getAllStores(Integer page);
 }

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import swag.marine.model.Destination;
 import swag.marine.service.DestinationService;
 
+import java.util.List;
+
 @RequestMapping(value = "/marine/destination",produces = "application/json;charset=UTF-8")
 @RestController
 @Tag(name = "destination",description = "주소 관련 API")
@@ -72,8 +74,8 @@ public class DestinationController {
             @ApiResponse(responseCode = "400",description = "기본 배송지 수정에 실패했습니다.")
     })
     @PostMapping("/updateDefaultStatus")
-    public ResponseEntity updateDefaultStatus(@RequestBody Destination destination){
-        boolean flag = destinationService.updateDefaultStatus(destination.getDestinationId());
+    public ResponseEntity updateDefaultStatus(@RequestBody List<Destination> destinations){
+        boolean flag = destinationService.updateDefaultStatus(destinations);
         if(flag) return ResponseEntity.status(HttpStatus.OK).build();
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
