@@ -81,13 +81,13 @@ public class UserServiceImpl implements UserService {
     }
     @Transactional
     @Override
-    public boolean updatePassword(String newPassword, User user) {
+    public boolean updatePassword(User user) {
         boolean check = passwordCheck(user);
         Integer result = 0;
         if(check){
             User newUser = User.builder()
                     .userId(user.getUserId())
-                    .password(passwordEncoder.encode(newPassword))
+                    .password(passwordEncoder.encode(user.getNewPassword()))
                     .build();
             result = userMapper.updatePassword(newUser);
         }
