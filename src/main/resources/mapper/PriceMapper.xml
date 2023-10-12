@@ -35,4 +35,10 @@
         DELETE FROM price
         WHERE price_id = #{priceId}
     </delete>
+
+    <select id="findPriceById" parameterType="int" resultType="Price">
+        SELECT *
+        FROM price
+        WHERE price_id = #{priceId}
+    </select>
 </mapper>

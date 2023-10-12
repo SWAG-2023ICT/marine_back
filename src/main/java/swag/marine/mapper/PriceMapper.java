@@ -13,4 +13,5 @@ public interface PriceMapper {
     List<Price> selectAllPriceByProductId(int productId);
     Integer deleteAllPriceByProductId(int productId);
     Integer deletePriceByPriceId(int priceId);
+    Price findPriceById(int priceId);
 }
