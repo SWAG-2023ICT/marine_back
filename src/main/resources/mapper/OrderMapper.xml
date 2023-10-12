@@ -3,7 +3,7 @@
 
 <mapper namespace="swag.marine.mapper.OrderMapper">
     <resultMap id="defaultOrder" type="Order">
-        <id property="orderId" column="order_id"/>
+        <id property="orderId" column="orders_id"/>
         <result property="orderDtm" column="order_dtm"/>
         <result property="totalPrice" column="total_price"/>
         <result property="deliveryPhoneNumber" column="delivery_phone_number"/>
@@ -47,7 +47,7 @@
     <insert id="addOrderDetail" parameterType="List">
         INSERT INTO orders_detail
         <foreach collection="orderDetails" item="item" separator=",">
-            VALUES (#{item.ordersId},#{item.productId},#{item.amount} )
+            VALUES (#{item.ordersId},#{item.productId},#{item.priceId},#{item.amount} )
         </foreach>
     </insert>
 

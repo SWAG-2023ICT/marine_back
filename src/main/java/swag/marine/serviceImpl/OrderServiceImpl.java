@@ -48,6 +48,7 @@ public class OrderServiceImpl implements OrderService {
                         .ordersId(order.getOrdersId())
                         .productId(p.getProductId())
                         .amount(p.getAmount())
+                        .priceId(p.getPrices().get(0).getPriceId())
                         .build()
                 );
             }
