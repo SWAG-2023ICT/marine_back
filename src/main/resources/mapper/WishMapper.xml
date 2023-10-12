@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="swag.marine.mapper.WishMapper">
+
+    <insert id="addWish" parameterType="Wish">
+        INSERT INTO wish (store_id, user_id)
+        VALUES ( #{storeId},#{userId} )
+    </insert>
+
+    <delete id="deleteWish" parameterType="List">
+        DELETE FROM wish
+        WHERE
+        <foreach collection="wishIds" item="wishId" separator="," open="(" close=")">
+            wish_id = #{wishId}
+        </foreach>
+    </delete>
+
+    <select id="findAllWish" parameterType="string" resultType="List">
+        SELECT store_id
+        FROM wish
+        WHERE user_id = #{userId}
+    </select>
+</mapper>

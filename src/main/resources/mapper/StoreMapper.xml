@@ -42,4 +42,13 @@
         LIMIT #{page}
         </if>
     </select>
+
+    <select id="getStoreByWishStore" parameterType="List" resultType="Store">
+        SELECT *
+        FROM store
+        WHERE
+        <foreach collection="storeIds" item="storeId" separator="," open="(" close=")">
+            store_id = #{storeId}
+        </foreach>
+    </select>
 </mapper>

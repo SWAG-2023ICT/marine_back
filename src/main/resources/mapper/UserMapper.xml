@@ -29,9 +29,19 @@
 
     <update id="updateUser" parameterType="User">
         UPDATE user
-        SET name = #{name},
-            password = #{password},
-            phone_number = #{phoneNumber}
+        SET
+            <if test="#{name} != null">
+                name = #{name},
+            </if>
+            <if test="#{phoneNumber} != null">
+                phone_number = #{phoneNumber}
+            </if>
+        WHERE user_id = #{userId}
+    </update>
+
+    <update id="updatePassword" parameterType="User">
+        UPDATE user
+        SET password = #{password}
         WHERE user_id = #{userId}
     </update>
 

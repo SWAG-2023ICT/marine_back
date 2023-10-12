@@ -10,9 +10,7 @@ public interface PriceMapper {
     Integer addPrice(Price price);
     Integer updatePrice(Price price);
     Integer deletePrice(int priceId);
-
     List<Price> selectAllPriceByProductId(int productId);
-
     Integer deleteAllPriceByProductId(int productId);
 
 }

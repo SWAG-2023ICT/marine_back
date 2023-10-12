@@ -7,20 +7,25 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import swag.marine.model.Store;
 import swag.marine.model.User;
+import swag.marine.model.Wish;
 import swag.marine.service.UserService;
 
+import java.util.List;
+
+@Slf4j
 @RequestMapping("/marine/users")
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "users", description = "유저 관련 API")
 public class UserController {
     private final UserService userService;
-    
     @Operation(summary = "유저 추가", description = "회원가입 절차를 통해 유저를 추가합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "유저를 정상적으로 등록했습니다.",
@@ -47,15 +52,26 @@ public class UserController {
         User user = userService.getUser(userId);
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }
-    @Operation(summary = "유저 수정", description = "유저 정보를 수정합니다.")
+    @Operation(summary = "유저 정보 수정", description = "유저 이름 혹은 전화번호를 수정합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "유저를 정상적으로 수정했습니다.",
                     content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = User.class)))
     })
-    @PutMapping("")
-    public ResponseEntity<?> updateUser(@RequestBody User user){
+    @PutMapping("/{userId}")
+    public ResponseEntity<?> updateUser(@PathVariable String userId,@RequestBody User user){
         boolean flag = userService.updateUser(user);
+        if(flag) return ResponseEntity.status(HttpStatus.OK).body("success!");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
+    }
+    @Operation(summary = "비밀번호 변경", description = "이전 비밀번호와 아이디와 변경 비밀번호를 받아 비밀번호를 변경합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "비밀번호 변경이 성공적으로 완료되었습니다."),
+            @ApiResponse(responseCode = "400",description = "비밀번호 변경에 실패했습니다.")
+    })
+    @PutMapping("/password")
+    public ResponseEntity<?> updatePassword(String oldPassword, User user){
+        boolean flag = userService.updatePassword(oldPassword,user);
         if(flag) return ResponseEntity.status(HttpStatus.OK).body("success!");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
     }
@@ -91,5 +107,24 @@ public class UserController {
         if(flag) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("duplicate!");
 
         return ResponseEntity.status(HttpStatus.OK).body("no duplicate!");
+    }
+    @PostMapping("/wish")
+    public ResponseEntity<?> addWish(@RequestBody Wish wish){
+        boolean flag = userService.addWish(wish);
+        if(flag) return ResponseEntity.status(HttpStatus.OK).body("success!");
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
+    }
+    @DeleteMapping("/wish")
+    public ResponseEntity<?> deleteWish(@RequestBody List<Integer> wishIds){
+        boolean flag = userService.deleteWish(wishIds);
+        if(flag) return ResponseEntity.status(HttpStatus.OK).body("success!");
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
+    }
+    @GetMapping("/wish/{userId}")
+    public ResponseEntity<?> getAllWishStore(@PathVariable String userId){
+        List<Store> stores = userService.findAllWish(userId);
+        return ResponseEntity.status(HttpStatus.OK).body(stores);
     }
 }

@@ -10,4 +10,5 @@ public interface StoreMapper {
     Integer addStore(Store store);
     Store getStoreById(String storeId);
     List<Store> getAllStores(int page);
+    List<Store> getStoreByWishStore(List<String> stringIds);
 }
