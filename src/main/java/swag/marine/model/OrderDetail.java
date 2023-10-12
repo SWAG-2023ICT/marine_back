@@ -15,4 +15,5 @@ public class OrderDetail {
     int ordersId;
     int productId;
     int amount;
+    int priceId;
 }
