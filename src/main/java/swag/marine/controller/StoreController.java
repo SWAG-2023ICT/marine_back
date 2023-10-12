@@ -59,8 +59,6 @@ public class StoreController {
     @PostMapping("")
     public ResponseEntity<?> addStore(@RequestBody Store store){
         boolean flag = userService.addUser(store);
-        log.info("[fuck] : {}",store);
-        log.info("flag : {}",flag);
         if(flag) flag = storeService.addStore(store);
 
         if(flag) return ResponseEntity.status(HttpStatus.OK).body("success!");

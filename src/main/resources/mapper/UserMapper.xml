@@ -27,6 +27,12 @@
         WHERE u.user_id = #{userId}
     </select>
 
+    <select id="getLoginUser" parameterType="String" resultType="User">
+        SELECT *
+        FROM user
+        WHERE user_id = #{userId}
+    </select>
+
     <update id="updateUser" parameterType="User">
         UPDATE user
         SET
