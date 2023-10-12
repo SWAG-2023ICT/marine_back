@@ -144,4 +144,12 @@ public class UserController {
         List<Store> stores = userService.findAllWish(userId);
         return ResponseEntity.status(HttpStatus.OK).body(stores);
     }
+
+    @GetMapping("/wish/check")
+    public ResponseEntity<?> checkWishStatus(@RequestParam String storeId,String userId){
+        boolean flag = userService.checkWishStatus(storeId,userId);
+        if(flag) return ResponseEntity.status(HttpStatus.OK).body(true);
+
+        return ResponseEntity.status(HttpStatus.OK).body(false);
+    }
 }

@@ -16,7 +16,9 @@ import swag.marine.model.Wish;
 import swag.marine.service.UserService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -109,6 +111,15 @@ public class UserServiceImpl implements UserService {
     public List<Store> findAllWish(String userId){
         List<String> storeIds = wishMapper.findAllWish(userId);
         if(storeIds.size() == 0) return new ArrayList<>();
+        log.info("fuck : {}",storeIds.toString());
         return storeMapper.getStoreByWishStore(storeIds);
+    }
+    @Override
+    public boolean checkWishStatus(String storeId, String userId) {
+        Map<String,String> items = new HashMap<>();
+        items.put("storeId",storeId);
+        items.put("userId",userId);
+        Integer result = wishMapper.checkWishStatus(items);
+        return result > 0;
     }
 }

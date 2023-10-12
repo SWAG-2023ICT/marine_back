@@ -47,8 +47,8 @@
         SELECT *
         FROM store
         WHERE
-        <foreach collection="storeIds" item="storeId" separator="," open="(" close=")">
-            store_id = #{storeId}
+        <foreach collection="list" item="item" separator="," index="index" open="(" close=")">
+            store_id = #{item.storeId}
         </foreach>
     </select>
 </mapper>
