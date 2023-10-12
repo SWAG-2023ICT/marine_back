@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import swag.marine.mapper.OrderMapper;
+import swag.marine.mapper.PriceMapper;
 import swag.marine.model.Order;
 import swag.marine.model.OrderDetail;
+import swag.marine.model.Price;
 import swag.marine.model.Product;
 import swag.marine.service.OrderService;
 
@@ -16,6 +18,7 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
+    private final PriceMapper priceMapper;
     @Override
     public Order getOrdersByOrderId(int orderId) {
         return orderMapper.getOrdersByOrderId(orderId);
@@ -34,7 +37,8 @@ public class OrderServiceImpl implements OrderService {
     public boolean addOrders(Order order) {
         List<OrderDetail> orderDetails = new ArrayList<>();
         for(Product p : order.getProducts()){
-            order.setTotalPrice(p.getPrices().get(0).getPriceByUnit() * p.getAmount());
+            Price price = priceMapper.findPriceById(p.getPrices().get(0).getPriceId());
+            order.setTotalPrice(price.getPriceByUnit() * p.getAmount());
         }
         Integer result = orderMapper.addOrder(order);
         if(result > 0){
