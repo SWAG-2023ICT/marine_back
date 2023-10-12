@@ -13,7 +13,7 @@ public interface UserService {
     boolean passwordCheck(User user);
     boolean idDuplicateCheck(String userId);
     boolean isStore(String sellerId);
-    boolean updatePassword(String newPassword, User user);
+    boolean updatePassword(User user);
     boolean addWish(Wish wish);
     boolean deleteWish(List<Integer> wishIds);
     List<Store> findAllWish(String userId);
