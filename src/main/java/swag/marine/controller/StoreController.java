@@ -1,7 +1,6 @@
 package swag.marine.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -47,6 +46,11 @@ public class StoreController {
     public ResponseEntity<Store> findStoreById(@PathVariable String storeId){
         Store store = storeService.findStoreById(storeId);
         return ResponseEntity.status(HttpStatus.OK).body(store);
+    }
+    @GetMapping("/search")
+    public ResponseEntity<List<Store>> findStoreByKeyword(String keyword){
+        List<Store> stores = storeService.findStoreByKeyword(keyword);
+        return ResponseEntity.status(HttpStatus.OK).body(stores);
     }
     @Operation(summary = "가게 등록",description = "사장님이 새로운 가게를 등록합니다.")
     @ApiResponses(value = {

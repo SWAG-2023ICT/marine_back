@@ -11,4 +11,6 @@ public interface StoreMapper {
     Store getStoreById(String storeId);
     List<Store> getAllStores(Integer page);
     List<Store> getStoreByWishStore(List<String> stringIds);
+    List<Store> getStoreByKeyword(String keyword);
+    List<Store> findStoreByUserId(String userId);
 }

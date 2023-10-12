@@ -26,4 +26,12 @@ public class StoreServiceImpl implements StoreService {
     public List<Store> getAllStores(Integer page) {
         return storeMapper.getAllStores(page);
     }
+    @Override
+    public List<Store> findStoreByKeyword(String keyword) {
+        return storeMapper.getStoreByKeyword(keyword);
+    }
+    @Override
+    public List<Store> findStoreByUserId(String userId) {
+        return storeMapper.findStoreByUserId(userId);
+    }
 }

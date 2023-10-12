@@ -8,4 +8,6 @@ public interface StoreService {
     boolean addStore(Store store);
     Store findStoreById(String storeId);
     List<Store> getAllStores(Integer page);
+    List<Store> findStoreByKeyword(String keyword);
+    List<Store> findStoreByUserId(String userId);
 }

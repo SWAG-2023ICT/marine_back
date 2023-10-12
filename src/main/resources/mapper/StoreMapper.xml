@@ -24,15 +24,19 @@
         </collection>
     </resultMap>
 
+    <sql id="allStoreData">
+        SELECT *
+        FROM store s LEFT JOIN product p ON s.store_id = p.store_id
+                     LEFT JOIN price pr ON p.product_id = pr.product_id
+    </sql>
+
     <insert id="addStore" parameterType="Store">
         INSERT INTO store
         VALUES ( #{storeId}, #{storeName},#{storePhoneNumber},#{storeAddress},#{storeImage},#{sellerId})
     </insert>
 
     <select id="getStoreById" parameterType="string" resultMap="defaultStore">
-        SELECT *
-        FROM store s LEFT JOIN product p ON s.store_id = p.store_id
-        LEFT JOIN price pr ON p.product_id = pr.product_id
+        <include refid="allStoreData"/>
     </select>
 
     <select id="getAllStores" parameterType="int" resultType="Store">
@@ -50,5 +54,17 @@
         <foreach collection="list" item="item" separator="," index="index" open="(" close=")">
             store_id = #{item.storeId}
         </foreach>
+    </select>
+
+    <select id="getStoreByKeyword" parameterType="string" resultType="Store">
+        SELECT *
+        FROM store
+        WHERE store_name LIKE CONCAT('%',#{keyword},'%')
+        OR store_address LIKE CONCAT('%',#{keyword},'%')
+    </select>
+
+    <select id="findStoreByUserId" parameterType="string" resultMap="defaultStore">
+        <include refid="allStoreData"/>
+        WHERE s.seller_id = #{userId}
     </select>
 </mapper>
