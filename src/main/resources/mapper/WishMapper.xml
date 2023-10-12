@@ -16,9 +16,15 @@
         </foreach>
     </delete>
 
-    <select id="findAllWish" parameterType="string" resultType="List">
-        SELECT store_id
+    <select id="findAllWish" parameterType="string" resultType="Wish">
+        SELECT *
         FROM wish
         WHERE user_id = #{userId}
+    </select>
+
+    <select id="checkWishStatus" parameterType="hashMap" resultType="int">
+        SELECT count(wish_id)
+        FROM wish
+        WHERE user_id = #{userId} AND store_id = #{storeId}
     </select>
 </mapper>
