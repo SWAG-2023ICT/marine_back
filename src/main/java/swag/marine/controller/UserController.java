@@ -70,8 +70,8 @@ public class UserController {
             @ApiResponse(responseCode = "400",description = "비밀번호 변경에 실패했습니다.")
     })
     @PutMapping("/password")
-    public ResponseEntity<?> updatePassword(String oldPassword, User user){
-        boolean flag = userService.updatePassword(oldPassword,user);
+    public ResponseEntity<?> updatePassword(String newPassword, User user){
+        boolean flag = userService.updatePassword(newPassword,user);
         if(flag) return ResponseEntity.status(HttpStatus.OK).body("success!");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
     }
