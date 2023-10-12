@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public boolean passwordCheck(User loginUser) {
-        User user = userMapper.getUser(loginUser.getUserId());
+        User user = userMapper.getLoginUser(loginUser.getUserId());
         // if(user == null) throw RuntimeException();
         return passwordEncoder.matches(loginUser.getPassword(), user.getPassword());
     }

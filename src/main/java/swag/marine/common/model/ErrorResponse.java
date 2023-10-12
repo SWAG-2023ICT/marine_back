@@ -7,12 +7,14 @@ import swag.marine.common.error.ErrorCode;
 public class ErrorResponse {
     private final int code;
     private final String message;
-    private final String exception;
+    private final String exceptionName;
+    private final String exceptionMessage;
 
     public ErrorResponse(ErrorCode errorCode,Exception exception){
         this.code = errorCode.getStatus();
         this.message = errorCode.getMessage();
-        this.exception = exception.getMessage();
+        this.exceptionName = exception.getClass().getSimpleName();
+        this.exceptionMessage = exception.getMessage();
 
     }
 }
