@@ -28,7 +28,7 @@ public class UserController {
     private final UserService userService;
     @Operation(summary = "유저 추가", description = "회원가입 절차를 통해 유저를 추가합니다.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "유저를 정상적으로 등록했습니다.",
+            @ApiResponse(responseCode = "201", description = "유저를 정상적으로 등록했습니다.",
                 content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "400", description = "유저 추가에 실패했습니다.",
                 content = @Content(mediaType = "application/json"))
@@ -37,7 +37,7 @@ public class UserController {
     @Transactional
     public ResponseEntity<?> addUser(@RequestBody User user){
         boolean flag = userService.addUser(user);
-        if(flag) return ResponseEntity.status(HttpStatus.OK).body("success!");
+        if(flag) return ResponseEntity.status(HttpStatus.CREATED).body("success!");
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
     }
@@ -108,13 +108,24 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body("no duplicate!");
     }
+    @Operation(summary = "가게 즐겨찾기", description = "사업자 번호와 유저 아이디를 받아와 즐겨찾기를 추가합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",description = "즐겨찾기 추가가 성공적으로 완료했습니다."),
+            @ApiResponse(responseCode = "400",description = "즐겨찾기 추가에 실패했습니다.")
+    })
     @PostMapping("/wish")
     public ResponseEntity<?> addWish(@RequestBody Wish wish){
         boolean flag = userService.addWish(wish);
-        if(flag) return ResponseEntity.status(HttpStatus.OK).body("success!");
+        if(flag) return ResponseEntity.status(HttpStatus.CREATED).body("success!");
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
     }
+
+    @Operation(summary = "가게 즐겨찾기 삭제",description = "즐겨찾기 기본키를 받아 즐겨찾기를 삭제합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "즐겨찾기 삭제에 성공했습니다."),
+            @ApiResponse(responseCode = "400",description = "즐겨찾기 삭제에 실패했습니다.")
+    })
     @DeleteMapping("/wish")
     public ResponseEntity<?> deleteWish(@RequestBody List<Integer> wishIds){
         boolean flag = userService.deleteWish(wishIds);
@@ -122,6 +133,12 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
     }
+
+    @Operation(summary = "즐겨찾기 조회",description = "유저 아이디로 즐겨찾기를 조회합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "조회에 성공했습니다."),
+            @ApiResponse(responseCode = "400",description = "조회에 실패했습니다.")
+    })
     @GetMapping("/wish/{userId}")
     public ResponseEntity<?> getAllWishStore(@PathVariable String userId){
         List<Store> stores = userService.findAllWish(userId);
