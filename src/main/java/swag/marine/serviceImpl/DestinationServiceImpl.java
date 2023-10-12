@@ -30,7 +30,6 @@ public class DestinationServiceImpl implements DestinationService {
             return 0;
         }
     }
-
     @Override
     public Integer updateDestination(Destination destination) {
         if (destinationMapper.updateDestination(destination) > 0) {
@@ -39,7 +38,6 @@ public class DestinationServiceImpl implements DestinationService {
             return 0;
         }
     }
-
     @Override
     public Integer deleteDestination(int destinationId) {
         if (destinationMapper.deleteDestination(destinationId) > 0) {
@@ -47,11 +45,15 @@ public class DestinationServiceImpl implements DestinationService {
         } else {
             return 0;
         }
-
     }
-
     @Override
     public List<Destination> selectByUserId(String userId) {
         return destinationMapper.selectByUserId(userId);
+    }
+
+    @Override
+    public boolean updateDefaultStatus(boolean defaultStatus) {
+        Integer result = destinationMapper.updateDefaultStatus(defaultStatus);
+        return result > 0;
     }
 }

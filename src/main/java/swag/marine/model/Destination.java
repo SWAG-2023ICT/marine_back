@@ -14,7 +14,7 @@ public class Destination {
     @Schema(description = "주소 기본키", example = "1")
     private int destinationId;
     @Schema(description = "우편번호", example = "52819")
-    private int zipCode;
+    private Integer zipCode;
     @Schema(description = "주소 이름(별칭)", example = "우리집",nullable = true)
     private String destinationName;
     @Schema(description = "주소(상세주소는 `,` 로 구분", example = "경남 진주시 호탄길, 연암아파트")

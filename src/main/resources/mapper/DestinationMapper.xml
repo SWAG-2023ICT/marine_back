@@ -10,8 +10,7 @@
         UPDATE destination SET
         zip_code = #{zipCode},
         destination_name = #{destinationName},
-        destination_address = #{destinationAddress},
-        default_status = #{defaultStatus}
+        destination_address = #{destinationAddress}
         WHERE destination_id = #{destinationId}
     </update>
 
