@@ -36,10 +36,10 @@
     <update id="updateUser" parameterType="User">
         UPDATE user
         SET
-            <if test="#{name} != null">
+            <if test="name != null">
                 name = #{name},
             </if>
-            <if test="#{phoneNumber} != null">
+            <if test="phoneNumber != null">
                 phone_number = #{phoneNumber}
             </if>
         WHERE user_id = #{userId}
