@@ -65,7 +65,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public boolean updateOrderStatus(Order order) {
-        Integer result = orderMapper.updateOrderStatus(order);
+        Integer result = 0;
+        if(order.getOrderStatus() == 3){
+            if(addCanceledOrder(order)) result = 1;
+        } else {
+            order.setOrderStatus(2);
+            result = orderMapper.updateDeliveryStatus(order);
+        }
         return result > 0;
     }
 
