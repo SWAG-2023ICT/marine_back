@@ -17,5 +17,5 @@ public interface UserService {
     boolean addWish(Wish wish);
     boolean deleteWish(List<Integer> wishIds);
     List<Store> findAllWish(String userId);
-    boolean checkWishStatus(String storeId, String userId);
+    Integer checkWishStatus(String storeId, String userId);
 }

@@ -23,7 +23,7 @@
     </select>
 
     <select id="checkWishStatus" parameterType="hashMap" resultType="int">
-        SELECT count(wish_id)
+        SELECT wish_id
         FROM wish
         WHERE user_id = #{userId} AND store_id = #{storeId}
     </select>
