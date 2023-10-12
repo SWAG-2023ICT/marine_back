@@ -14,7 +14,7 @@ public interface UserService {
     boolean idDuplicateCheck(String userId);
     boolean isStore(String sellerId);
     boolean updatePassword(User user);
-    boolean addWish(Wish wish);
+    Integer addWish(Wish wish);
     boolean deleteWish(List<Integer> wishIds);
     List<Store> findAllWish(String userId);
     Integer checkWishStatus(String storeId, String userId);

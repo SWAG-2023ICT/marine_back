@@ -115,8 +115,8 @@ public class UserController {
     })
     @PostMapping("/wish")
     public ResponseEntity<?> addWish(@RequestBody Wish wish){
-        boolean flag = userService.addWish(wish);
-        if(flag) return ResponseEntity.status(HttpStatus.CREATED).body("success!");
+        Integer wishId = userService.addWish(wish);
+        if(wishId > 0) return ResponseEntity.status(HttpStatus.CREATED).body(wishId);
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
     }

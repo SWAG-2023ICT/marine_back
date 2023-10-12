@@ -97,9 +97,11 @@ public class UserServiceImpl implements UserService {
     }
     @Transactional
     @Override
-    public boolean addWish(Wish wish) {
+    public Integer addWish(Wish wish) {
         Integer result = wishMapper.addWish(wish);
-        return result > 0;
+        if(result > 0) return wish.getWishId();
+
+        return 0;
     }
     @Transactional
     @Override
