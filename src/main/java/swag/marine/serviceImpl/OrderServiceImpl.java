@@ -67,9 +67,15 @@ public class OrderServiceImpl implements OrderService {
     public boolean updateOrderStatus(Order order) {
         Integer result = 0;
         if(order.getOrderStatus() == 3){
-            if(addCanceledOrder(order)) result = 1;
-        } else {
-            order.setOrderStatus(2);
+            if(addCanceledOrder(order)){
+                order.setOrderStatus(3);
+                if(orderMapper.updateOrderStatus(order) > 0){
+                    order.setOrderStatus(0);
+                    result = orderMapper.updateDeliveryStatus(order);
+                }
+            }
+        } else if(order.getOrderStatus() == 1 || order.getOrderStatus() == 2) {
+            order.setDeliveryStatus(2);
             result = orderMapper.updateDeliveryStatus(order);
         }
         return result > 0;
@@ -77,6 +83,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public boolean addCanceledOrder(Order order) {
+        order.setReason("공급 문제로 배송을 취소합니다.");
         Integer result = orderMapper.addCanceledOrders(order);
         return result > 0;
     }
