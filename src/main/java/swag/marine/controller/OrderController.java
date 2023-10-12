@@ -15,7 +15,7 @@ import swag.marine.service.OrderService;
 
 import java.util.List;
 
-@RequestMapping("/marine/orders")
+@RequestMapping(value = "/marine/orders",produces = "application/json;charset=UTF-8")
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "orders",description = "주문 관련 API")
