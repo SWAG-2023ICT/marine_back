@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,10 @@ import swag.marine.model.Wish;
 import swag.marine.service.StoreService;
 import swag.marine.service.UserService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 @RequestMapping(value = "/marine/users",produces = "application/json;charset=UTF-8")
@@ -88,12 +92,18 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody User user){
         boolean passwordCheck = userService.passwordCheck(user);
         boolean isStore = userService.isStore(user.getUserId());
+        Map<String, Object> response = new HashMap<>();
         if (passwordCheck) {
             if(isStore){
                 List<Store> stores = storeService.findStoreByUserId(user.getUserId());
-                return ResponseEntity.status(HttpStatus.OK).body(stores.get(0));
+                response.put("userType","store");
+                response.put("data",stores.get(0));
+                return ResponseEntity.status(HttpStatus.OK).body(JSONObject.toJSONString(response));
+            } else {
+                response.put("userType","user");
+                response.put("data",userService.getUser(user.getUserId()));
+                return ResponseEntity.status(HttpStatus.OK).body(JSONObject.toJSONString(response));
             }
-            return ResponseEntity.status(HttpStatus.OK).body(false);
         }
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
