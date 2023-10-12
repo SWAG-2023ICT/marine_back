@@ -9,6 +9,7 @@
         <result property="phoneNumber" column="phone_number"/>
         <collection property="destinations" ofType="Destination">
             <id property="destinationId" column="destination_id"/>
+            <result property="zipCode" column="zip_code"/>
             <result property="destinationName" column="destination_name"/>
             <result property="destinationAddress" column="destination_address"/>
             <result property="defaultStatus" column="default_status"/>
