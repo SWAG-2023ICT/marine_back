@@ -100,4 +100,11 @@
         SET delivery_invoice = #{deliveryInvoice}
         WHERE orders_id = #{ordersId}
     </update>
+
+    <select id="getCanceledOrders" parameterType="int" resultType="Order">
+        SELECT co.reason, co.canceld_dtm
+        FROM canceled_orders co
+        RIGHT JOIN orders o on co.orders_id = o.orders_id
+        WHERE o.orders_id = #{orderId}
+    </select>
 </mapper>
