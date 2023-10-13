@@ -26,8 +26,8 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.getOrdersByOrderId(orderId);
     }
     @Override
-    public List<Order> getOrdersByUserId(String userId) {
-        return orderMapper.getOrdersByUserId(userId);
+    public List<Order> getOrdersByUsersId(String userId) {
+        return orderMapper.getOrdersByUsersId(userId);
     }
     @Override
     public List<Order> getOrdersByStoreId(String storeId) {

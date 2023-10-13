@@ -10,7 +10,7 @@ import java.util.List;
 public interface OrderMapper {
     Order getOrdersByOrderId(int orderId);
     List<Order> getOrdersByStoreId(String storeId);
-    List<Order> getOrdersByUserId(String userId);
+    List<Order> getOrdersByUsersId(String userId);
     Integer addOrder(Order order);
     Integer addOrderDetail(List<OrderDetail> orderDetails);
     Integer updateOrderStatus(Order order);
