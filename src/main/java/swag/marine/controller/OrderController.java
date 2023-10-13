@@ -41,7 +41,7 @@ public class OrderController {
     })
     @GetMapping("/users/{userId}")
     public ResponseEntity<List<Order>> getOrderByUserId(@PathVariable String userId){
-        return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrdersByUserId(userId));
+        return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrdersByUsersId(userId));
     }
     @Operation(summary = "주문 내역 검색(가게)",description = "사업자 번호로 주문 내역을 조회합니다.")
     @ApiResponses(value = {
