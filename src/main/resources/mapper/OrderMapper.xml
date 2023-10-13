@@ -81,8 +81,12 @@
     </update>
 
     <insert id="addCanceledOrders" parameterType="Order">
-        INSERT INTO canceled_orders
-        value (#{ordersId},#{reason},now())
+        INSERT INTO canceled_orders (orders_id,canceled_dtm,reason)
+        value ( #{ordersId},now(),
+        <if test="reason == null">
+            "공급문제로 취소되었습니다." )
+        </if>
+        #{reason})
     </insert>
 
     <update id="updateDeliveryStatus" parameterType="Order">

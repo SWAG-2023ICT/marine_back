@@ -82,7 +82,6 @@ public class OrderServiceImpl implements OrderService {
     }
     @Override
     public boolean addCanceledOrder(Order order) {
-        order.setReason("공급 문제로 배송을 취소합니다.");
         Integer result = orderMapper.addCanceledOrders(order);
         return result > 0;
     }
