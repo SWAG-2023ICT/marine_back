@@ -27,7 +27,11 @@ public class OrderServiceImpl implements OrderService {
     }
     @Override
     public List<Order> getOrdersByUsersId(String userId) {
-        return orderMapper.getOrdersByUsersId(userId);
+        List<Order> orders = orderMapper.getOrdersByUsersId(userId);
+        for(Order order : orders){
+            order.setDestination(destinationMapper.getDestinationById(order.getDestinationId()));
+        }
+        return orders;
     }
     @Override
     public List<Order> getOrdersByStoreId(String storeId) {
