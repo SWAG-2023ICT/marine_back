@@ -78,6 +78,7 @@ public class ConvertVo {
                 .reason(order.getReason())
                 .canceledDtm(order.getCanceledDtm())
                 .destination(order.getDestination())
+                .destinationId(order.getDestinationId())
                 .build();
         try{
             List<Product> products = order.getProducts();
