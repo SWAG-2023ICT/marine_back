@@ -12,8 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import swag.marine.model.Order;
+import swag.marine.model.vo.OrderVo;
 import swag.marine.service.OrderService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RequestMapping(value = "/marine/orders",produces = "application/json;charset=UTF-8")
@@ -40,7 +42,7 @@ public class OrderController {
                 schema = @Schema(implementation = Order.class)))
     })
     @GetMapping("/users/{userId}")
-    public ResponseEntity<List<Order>> getOrderByUserId(@PathVariable String userId){
+    public ResponseEntity<List<OrderVo>> getOrderByUserId(@PathVariable String userId) throws SQLException {
         return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrdersByUsersId(userId));
     }
     @Operation(summary = "주문 내역 검색(가게)",description = "사업자 번호로 주문 내역을 조회합니다.")
@@ -50,7 +52,7 @@ public class OrderController {
                 schema = @Schema(implementation = Order.class)))
     })
     @GetMapping("/stores/{storeId}")
-    public ResponseEntity<List<Order>> getOrderByStoreId(@PathVariable String storeId){
+    public ResponseEntity<List<OrderVo>> getOrderByStoreId(@PathVariable String storeId){
         return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrdersByStoreId(storeId));
     }
 

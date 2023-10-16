@@ -3,6 +3,7 @@ package swag.marine.serviceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import swag.marine.common.util.ConvertVo;
 import swag.marine.mapper.DestinationMapper;
 import swag.marine.mapper.OrderMapper;
 import swag.marine.mapper.PriceMapper;
@@ -10,8 +11,10 @@ import swag.marine.model.Order;
 import swag.marine.model.OrderDetail;
 import swag.marine.model.Price;
 import swag.marine.model.Product;
+import swag.marine.model.vo.OrderVo;
 import swag.marine.service.OrderService;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,12 +24,13 @@ public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
     private final PriceMapper priceMapper;
     private final DestinationMapper destinationMapper;
+    private final ConvertVo convertVo;
     @Override
     public Order getOrdersByOrderId(int orderId) {
         return orderMapper.getOrdersByOrderId(orderId);
     }
     @Override
-    public List<Order> getOrdersByUsersId(String userId) {
+    public List<OrderVo> getOrdersByUsersId(String userId) throws SQLException {
         List<Order> orders = orderMapper.getOrdersByUsersId(userId);
         for(Order order : orders){
             order.setDestination(destinationMapper.getDestinationById(order.getDestinationId()));
@@ -36,10 +40,14 @@ public class OrderServiceImpl implements OrderService {
                 order.setCanceledDtm(tmp.getCanceledDtm());
             }
         }
-        return orders;
+        List<OrderVo> orderVoList = new ArrayList<>();
+        for(Order order : orders){
+            orderVoList.add(convertVo.convert(order));
+        }
+        return orderVoList;
     }
     @Override
-    public List<Order> getOrdersByStoreId(String storeId) {
+    public List<OrderVo> getOrdersByStoreId(String storeId) throws SQLException {
         List<Order> orders = orderMapper.getOrdersByStoreId(storeId);
         for(Order order : orders){
             order.setDestination(destinationMapper.getDestinationById(order.getDestinationId()));
@@ -49,7 +57,11 @@ public class OrderServiceImpl implements OrderService {
                 order.setCanceledDtm(tmp.getCanceledDtm());
             }
         }
-        return orders;
+        List<OrderVo> orderVoList = new ArrayList<>();
+        for(Order order : orders){
+            orderVoList.add(convertVo.convert(order));
+        }
+        return orderVoList;
     }
 
     @Transactional
