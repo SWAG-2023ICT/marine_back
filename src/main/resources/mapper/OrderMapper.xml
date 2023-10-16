@@ -102,7 +102,7 @@
     </update>
 
     <select id="getCanceledOrders" parameterType="int" resultType="Order">
-        SELECT co.reason, co.canceld_dtm
+        SELECT co.reason, co.canceled_dtm
         FROM canceled_orders co
         RIGHT JOIN orders o on co.orders_id = o.orders_id
         WHERE o.orders_id = #{orderId}

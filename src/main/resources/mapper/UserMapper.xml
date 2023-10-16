@@ -23,7 +23,7 @@
 
     <select id="getUser" parameterType="String" resultMap="defaultUser">
         SELECT *
-        FROM user AS u INNER JOIN destination AS d
+        FROM user AS u LEFT JOIN destination AS d
         ON u.user_id = d.user_id
         WHERE u.user_id = #{userId}
     </select>

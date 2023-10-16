@@ -30,9 +30,11 @@ public class OrderServiceImpl implements OrderService {
         List<Order> orders = orderMapper.getOrdersByUsersId(userId);
         for(Order order : orders){
             order.setDestination(destinationMapper.getDestinationById(order.getDestinationId()));
-            Order tmp = orderMapper.getCanceledOrders(order.getOrdersId());
-            order.setReason(tmp.getReason());
-            order.setCanceledDtm(tmp.getCanceledDtm());
+            if(order.getOrderStatus() == 3){
+                Order tmp = orderMapper.getCanceledOrders(order.getOrdersId());
+                order.setReason(tmp.getReason());
+                order.setCanceledDtm(tmp.getCanceledDtm());
+            }
         }
         return orders;
     }
@@ -41,9 +43,11 @@ public class OrderServiceImpl implements OrderService {
         List<Order> orders = orderMapper.getOrdersByStoreId(storeId);
         for(Order order : orders){
             order.setDestination(destinationMapper.getDestinationById(order.getDestinationId()));
-            Order tmp = orderMapper.getCanceledOrders(order.getOrdersId());
-            order.setReason(tmp.getReason());
-            order.setCanceledDtm(tmp.getCanceledDtm());
+            if(order.getOrderStatus() == 3){
+                Order tmp = orderMapper.getCanceledOrders(order.getOrdersId());
+                order.setReason(tmp.getReason());
+                order.setCanceledDtm(tmp.getCanceledDtm());
+            }
         }
         return orders;
     }
