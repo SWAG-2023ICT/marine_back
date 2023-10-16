@@ -71,8 +71,8 @@ public class StoreController {
         boolean flag = userService.addUser(store);
         if(flag) flag = storeService.addStore(store);
 
-        if(flag) return ResponseEntity.status(HttpStatus.OK).body("success!");
+        if(flag) return ResponseEntity.status(HttpStatus.OK).build();
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail!");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }
