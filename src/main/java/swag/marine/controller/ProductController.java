@@ -63,8 +63,9 @@ public class ProductController {
             @ApiResponse(responseCode = "400",description = "상품 수정에 실패했습니다.",
                 content = @Content(mediaType = "application/json"))
     })
-    @PostMapping("/updateProduct")
-    public ResponseEntity updateProduct(@RequestBody Product product)  {
+    @PostMapping(value = "/updateProduct",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity updateProduct(@RequestPart MultipartFile productImage, @RequestPart Product product) throws IOException {
+        product.setProductImage(productImage.getBytes());
         List<Price> prices = product.getPrices();
         int result = 0;
         for(Price price : prices){
