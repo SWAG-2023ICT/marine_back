@@ -21,6 +21,6 @@ public class StoreVo {
     private String storeAddress;
     private SerialBlob storeImage;
     private String sellerId;
-    private List<Order> orders;
+    private List<OrderVo> orders;
     private List<ProductVo> products;
 }
