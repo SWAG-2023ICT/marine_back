@@ -10,14 +10,17 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import swag.marine.model.Store;
 import swag.marine.model.vo.StoreVo;
 import swag.marine.service.StoreService;
 import swag.marine.service.UserService;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -62,8 +65,9 @@ public class StoreController {
                 content = @Content(mediaType = "application/json"))
     })
     @Transactional
-    @PostMapping("")
-    public ResponseEntity<?> addStore(@RequestBody Store store){
+    @PostMapping(value = "",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<?> addStore(@RequestPart MultipartFile storeImage, @RequestPart Store store) throws IOException {
+        store.setStoreImage(storeImage.getBytes());
         boolean flag = userService.addUser(store);
         if(flag) flag = storeService.addStore(store);
 

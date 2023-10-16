@@ -52,7 +52,7 @@ public class OrderController {
                 schema = @Schema(implementation = Order.class)))
     })
     @GetMapping("/stores/{storeId}")
-    public ResponseEntity<List<OrderVo>> getOrderByStoreId(@PathVariable String storeId){
+    public ResponseEntity<List<OrderVo>> getOrderByStoreId(@PathVariable String storeId) throws SQLException {
         return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrdersByStoreId(storeId));
     }
 
