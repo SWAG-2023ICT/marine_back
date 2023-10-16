@@ -13,11 +13,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import swag.marine.model.Price;
 import swag.marine.model.Product;
 import swag.marine.service.PriceService;
 import swag.marine.service.ProductService;
 
+import java.io.IOException;
 import java.util.List;
 @Slf4j
 @RequestMapping(value = "/marine/product",produces = "application/json;charset=UTF-8")
@@ -35,9 +37,11 @@ public class ProductController {
             @ApiResponse(responseCode = "400",description = "상품 추가에 실패했습니다.",
                 content = @Content(mediaType = "application/json"))
     })
-    @PostMapping("/addProduct")
-    public ResponseEntity addProduct(@RequestBody Product product)  {
+    @PostMapping(value = "/addProduct", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,MediaType.APPLICATION_JSON_VALUE}   )
+    public ResponseEntity addProduct(@RequestPart MultipartFile productImage,
+                                     @RequestPart Product product) throws IOException {
         List<Price> prices = product.getPrices();
+        product.setProductImage(productImage.getBytes());
         int result1 = productService.addProduct(product);
         int result2 = 0;
         for(Price price : prices){
