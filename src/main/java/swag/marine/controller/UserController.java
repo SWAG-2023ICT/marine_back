@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.*;
 import swag.marine.model.Store;
 import swag.marine.model.User;
 import swag.marine.model.Wish;
+import swag.marine.model.vo.StoreVo;
 import swag.marine.service.StoreService;
 import swag.marine.service.UserService;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,13 +91,13 @@ public class UserController {
                     content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/auth")
-    public ResponseEntity<?> login(@RequestBody User user){
+    public ResponseEntity<?> login(@RequestBody User user) throws SQLException {
         boolean passwordCheck = userService.passwordCheck(user);
         boolean isStore = userService.isStore(user.getUserId());
         Map<String, Object> response = new HashMap<>();
         if (passwordCheck) {
             if(isStore){
-                List<Store> stores = storeService.findStoreByUserId(user.getUserId());
+                List<StoreVo> stores = storeService.findStoreByUserId(user.getUserId());
                 response.put("userType","store");
                 response.put("data",stores.get(0));
                 return ResponseEntity.status(HttpStatus.OK).body(response);

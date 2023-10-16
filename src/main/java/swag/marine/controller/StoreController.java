@@ -14,9 +14,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import swag.marine.model.Store;
+import swag.marine.model.vo.StoreVo;
 import swag.marine.service.StoreService;
 import swag.marine.service.UserService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Slf4j
@@ -34,7 +36,7 @@ public class StoreController {
                 array = @ArraySchema(schema = @Schema(implementation = Store.class))))
     })
     @GetMapping("")
-    public ResponseEntity<List<Store>> getAllStores(@RequestParam(required = false) Integer page){
+    public ResponseEntity<List<Store>> getAllStores(@RequestParam(required = false) Integer page) throws SQLException {
         return ResponseEntity.status(HttpStatus.OK).body(storeService.getAllStores(page));
     }
     @Operation(summary = "가게 조회",description = "사업자 번호를 통해 특정가게를 조회합니다.")
@@ -43,12 +45,12 @@ public class StoreController {
                 content = @Content(mediaType = "application/json"))
     })
     @GetMapping("/{storeId}")
-    public ResponseEntity<Store> findStoreById(@PathVariable String storeId){
-        Store store = storeService.findStoreById(storeId);
+    public ResponseEntity<StoreVo> findStoreById(@PathVariable String storeId) throws SQLException {
+        StoreVo store = storeService.findStoreById(storeId);
         return ResponseEntity.status(HttpStatus.OK).body(store);
     }
     @GetMapping("/search")
-    public ResponseEntity<List<Store>> findStoreByKeyword(String keyword){
+    public ResponseEntity<List<Store>> findStoreByKeyword(String keyword) throws SQLException {
         List<Store> stores = storeService.findStoreByKeyword(keyword);
         return ResponseEntity.status(HttpStatus.OK).body(stores);
     }
